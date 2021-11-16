@@ -323,18 +323,18 @@ extern "C"
             LOGD("Error capturing sample\n");
             return 1;
         }
-        FILE *file1;
-        char buf[40];
-        static int count=0;
-        short * buffer1 = (short*)buffer;
-        sprintf(buf,"/data/data/com.company.ssl/record%d.txt",count);
-        file1 = fopen(buf, "wb");
-        for(int i=0;i<size/2;++i) {
-            sprintf(buf,"%d\r\n",*(buffer1+i) );
-            fwrite(buf,1,strlen(buf),file1);
-        }
-        fclose(file1);
-        count++;
+//        FILE *file1;
+//        char buf[40];
+//        static int count=0;
+//        short * buffer1 = (short*)buffer;
+//        sprintf(buf,"/data/data/com.company.ssl/record%d.txt",count);
+//        file1 = fopen(buf, "wb");
+//        for(int i=0;i<size/2;++i) {
+//            sprintf(buf,"%d\r\n",*(buffer1+i) );
+//            fwrite(buf,1,strlen(buf),file1);
+//        }
+//        fclose(file1);
+//        count++;
         LOGD("Capture succeed! %d\n",size);
         double* res;
     clock_t start, finish;

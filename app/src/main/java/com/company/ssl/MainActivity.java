@@ -148,15 +148,13 @@ public class MainActivity extends AppCompatActivity {
 //        AudioCapture.tinycap();
         new Thread() {
             public void run() {
-//                while(true) {
+                while(true) {
                     AudioCapture.open();
                     double[] specData = new double[32761];
-                    int count=0;
-                    while(count<10) {
+                    while(true) {
                         if (AudioCapture.read(specData) > 0) {
                             break;
                         }
-                        count++;
                         double max = -10000, min = 10000;
                         for (int i = 0; i < 32761; ++i) {
                             if (specData[i] > max) max = specData[i];
@@ -178,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     AudioCapture.close();
                 }
-//            }
+            }
         }.start();
 
     }
