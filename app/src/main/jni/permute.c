@@ -2,7 +2,7 @@
  * File: permute.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Nov-2021 11:11:15
+ * C/C++ source code generated on  : 17-Nov-2021 10:34:49
  */
 
 /* Include Files */
@@ -11,19 +11,19 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const double a[11793960]
- *                double b[11793960]
+ * Arguments    : const double a[1814760]
+ *                double b[1814760]
  * Return Type  : void
  */
-void b_permute(const double a[11793960], double b[11793960])
+void b_permute(const double a[1814760], double b[1814760])
 {
   int b_b_tmp;
   int b_k;
   int b_tmp;
   int k;
   for (k = 0; k < 120; k++) {
-    for (b_k = 0; b_k < 32761; b_k++) {
-      b_tmp = 3 * b_k + 98283 * k;
+    for (b_k = 0; b_k < 5041; b_k++) {
+      b_tmp = 3 * b_k + 15123 * k;
       b_b_tmp = 3 * k + 360 * b_k;
       b[b_b_tmp] = a[b_tmp];
       b[b_b_tmp + 1] = a[b_tmp + 1];

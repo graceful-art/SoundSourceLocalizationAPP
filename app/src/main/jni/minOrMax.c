@@ -2,7 +2,7 @@
  * File: minOrMax.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Nov-2021 11:11:15
+ * C/C++ source code generated on  : 17-Nov-2021 10:34:49
  */
 
 /* Include Files */
@@ -12,10 +12,10 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const double x[32761]
+ * Arguments    : const double x[5041]
  * Return Type  : double
  */
-double maximum(const double x[32761])
+double maximum(const double x[5041])
 {
   double d;
   double ex;
@@ -28,7 +28,7 @@ double maximum(const double x[32761])
     idx = 0;
     k = 2;
     exitg1 = false;
-    while ((!exitg1) && (k <= 32761)) {
+    while ((!exitg1) && (k <= 5041)) {
       if (!rtIsNaN(x[k - 1])) {
         idx = k;
         exitg1 = true;
@@ -42,7 +42,7 @@ double maximum(const double x[32761])
   } else {
     ex = x[idx - 1];
     idx++;
-    for (k = idx; k < 32762; k++) {
+    for (k = idx; k < 5042; k++) {
       d = x[k - 1];
       if (ex < d) {
         ex = d;
@@ -53,10 +53,10 @@ double maximum(const double x[32761])
 }
 
 /*
- * Arguments    : const double x[32761]
+ * Arguments    : const double x[5041]
  * Return Type  : double
  */
-double minimum(const double x[32761])
+double minimum(const double x[5041])
 {
   double d;
   double ex;
@@ -69,7 +69,7 @@ double minimum(const double x[32761])
     idx = 0;
     k = 2;
     exitg1 = false;
-    while ((!exitg1) && (k <= 32761)) {
+    while ((!exitg1) && (k <= 5041)) {
       if (!rtIsNaN(x[k - 1])) {
         idx = k;
         exitg1 = true;
@@ -83,7 +83,7 @@ double minimum(const double x[32761])
   } else {
     ex = x[idx - 1];
     idx++;
-    for (k = idx; k < 32762; k++) {
+    for (k = idx; k < 5042; k++) {
       d = x[k - 1];
       if (ex > d) {
         ex = d;

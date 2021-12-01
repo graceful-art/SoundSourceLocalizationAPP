@@ -2,7 +2,7 @@
  * File: MBSS_computeAngularSpectrum.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Nov-2021 11:11:15
+ * C/C++ source code generated on  : 17-Nov-2021 10:34:49
  */
 
 /* Include Files */
@@ -49,20 +49,19 @@
  *  freqBins         : 1 x K containing the index of frequency bins used for the
  * aggregation
  *
- * Arguments    : const double alpha[3931320]
+ * Arguments    : const double alpha[604920]
  *                const cell_wrap_2 alphaSampled[120]
  *                const cell_wrap_2 tauGrid[120]
  *                const creal_T X[131072]
- *                double specInst[65522]
+ *                double specInst[10082]
  * Return Type  : void
  */
-void MBSS_computeAngularSpectrum(const double alpha[3931320],
+void MBSS_computeAngularSpectrum(const double alpha[604920],
                                  const cell_wrap_2 alphaSampled[120],
                                  const cell_wrap_2 tauGrid[120],
                                  const creal_T X[131072],
-                                 double specInst[65522])
+                                 double specInst[10082])
 {
-  static double specCurrentPair[65522];
   static const signed char pairId[240] = {
       1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  2,  2,  2,
       2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  3,  3,  3,  3,  3,  3,  3,
@@ -86,6 +85,7 @@ void MBSS_computeAngularSpectrum(const double alpha[3931320],
   creal_T hatRxx[2048];
   creal_T EXP[512];
   creal_T b_y[256];
+  double specCurrentPair[10082];
   double NUM[512];
   double TR[512];
   double b_b[512];
@@ -151,7 +151,7 @@ void MBSS_computeAngularSpectrum(const double alpha[3931320],
   /*  Computing the angular spectrum */
   /*  local spectrum */
   /*  nbin x nFrames x 2 x 2 */
-  memset(&specInst[0], 0, 65522U * sizeof(double));
+  memset(&specInst[0], 0, 10082U * sizeof(double));
   emxInit_real_T(&specSampledgrid, 2);
   emxInit_real_T(&SNR, 3);
   emxInit_real_T(&y, 3);
@@ -325,10 +325,10 @@ void MBSS_computeAngularSpectrum(const double alpha[3931320],
     for (b_i = 0; b_i < ibtile; b_i++) {
       x->data[b_i] = alphaSampled[i].f1->data[b_i];
     }
-    for (b_i = 0; b_i < 65522; b_i++) {
+    for (b_i = 0; b_i < 10082; b_i++) {
       specCurrentPair[b_i] = rtNaN;
     }
-    for (k = 0; k < 32761; k++) {
+    for (k = 0; k < 5041; k++) {
       re = alpha[i + 120 * k];
       if ((re >= x->data[0]) && (re <= x->data[x->size[0] - 1])) {
         ibtile = x->size[0];
@@ -357,16 +357,16 @@ void MBSS_computeAngularSpectrum(const double alpha[3931320],
         }
         re = specSampledgrid->data[(npages + specSampledgrid->size[0]) - 1];
         if (re == specSampledgrid->data[npages + specSampledgrid->size[0]]) {
-          specCurrentPair[k + 32761] = re;
+          specCurrentPair[k + 5041] = re;
         } else {
-          specCurrentPair[k + 32761] =
+          specCurrentPair[k + 5041] =
               (1.0 - r) * re +
               r * specSampledgrid->data[npages + specSampledgrid->size[0]];
         }
       }
     }
     /* Aggregation */
-    for (b_i = 0; b_i < 65522; b_i++) {
+    for (b_i = 0; b_i < 10082; b_i++) {
       specInst[b_i] += specCurrentPair[b_i];
     }
   }

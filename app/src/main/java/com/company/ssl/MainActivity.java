@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.SurfaceTexture;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -36,6 +37,15 @@ import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.cos;
+import static java.lang.Math.pow;
+import static java.lang.Math.rint;
+import static java.lang.Math.round;
+import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.tan;
+
 public class MainActivity extends AppCompatActivity {
     private final String TAG = MainActivity.class.getSimpleName();
     private final int[] colorMap = {0x800000,0x900000,0xA00000,0xB00000,0xC00000,0xD00000,0xE00000,0xF00000,
@@ -46,11 +56,14 @@ public class MainActivity extends AppCompatActivity {
             0x00FFFF,0x00F0FF,0x00E0FF,0x00D0FF,0x00C0FF,0x00B0FF,0x00A0FF,0x0090FF,
             0x0080FF,0x0070FF,0x0060FF,0x0050FF,0x0040FF,0x0030FF,0x0020FF,0x0010FF,
             0x0000FF,0x0000F0,0x0000E0,0x0000D0,0x0000C0,0x0000B0,0x0000A0,0x000090,0x000080};
-    private Context context;
+    private final double[] collectMatrix = {415.962094212636,320.847062285448,399.466642821620,0.934791158729619,
+            406.677394741051,239.603680350901,-406.940826536906,5.05088524890112};
 
     private ImageView mImageView;
     private Bitmap soundbitmap;
     private BitmapDrawable bmpDraw;
+    private Bitmap mBitmap;
+    private int xCoordinate,yCoordinate;
 
     private UsbCameraModule mUsbCameraModule;
     private Surface mPreviewSurface;
@@ -64,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what){
                 case 0x00:
-                    mImageView.setImageBitmap(mUsbCameraModule.mBitmap);
+                    mImageView.setImageBitmap(mBitmap);
                     break;
 
                 default:
@@ -150,28 +163,36 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 while(true) {
                     AudioCapture.open();
-                    double[] specData = new double[32761];
+                    double[] expectedData = new double[2];
+                    double x,y,z;
                     while(true) {
-                        if (AudioCapture.read(specData) > 0) {
+                        if (AudioCapture.read(expectedData) > 0) {
                             break;
                         }
-                        double max = -10000, min = 10000;
-                        for (int i = 0; i < 32761; ++i) {
-                            if (specData[i] > max) max = specData[i];
-                            if (specData[i] < min) min = specData[i];
-                        }
-                        Log.d(TAG, "max:" + max + " min:" + min);
-                        int[] picture = new int[32761];
-                        int res;
-                        for (int i = 0; i < 32761; ++i) {
-                            res = (int) ((max - specData[32760 - i]) / (max - min) * 64);
-                            if(res < 12) picture[i] = (0xFF << 24) | colorMap[res];
-                            else picture[i] = (0x00 << 24) | colorMap[res];
-                        }
-                        soundbitmap = Bitmap.createBitmap(picture, 181, 181, Bitmap.Config.ARGB_8888);
-                        Matrix mx = new Matrix();
-                        mx.postScale(-1, 1);
-                        soundbitmap = Bitmap.createBitmap(soundbitmap, 0, 0, soundbitmap.getWidth(), soundbitmap.getHeight(), mx, false);
+                        expectedData[0] = tan(PI * (-90-expectedData[0]) / 180);
+                        expectedData[1] = tan(PI * expectedData[1] /180);
+                        y = 1/sqrt(1+pow(expectedData[0],2)+pow(expectedData[1],2));
+                        x = -expectedData[0]*y;
+                        z = expectedData[1]*y;
+                        xCoordinate = (int)round((x*collectMatrix[0]+y*collectMatrix[1]+z*collectMatrix[2]+collectMatrix[3])/y);
+                        yCoordinate = (int)round((x*collectMatrix[4]+y*collectMatrix[5]+z*collectMatrix[6]+collectMatrix[7])/y);
+//                        double max = -10000, min = 10000;
+//                        for (int i = 0; i < 32761; ++i) {
+//                            if (specData[i] > max) max = specData[i];
+//                            if (specData[i] < min) min = specData[i];
+//                        }
+//                        Log.d(TAG, "max:" + max + " min:" + min);
+//                        int[] picture = new int[32761];
+//                        int res;
+//                        for (int i = 0; i < 32761; ++i) {
+//                            res = (int) ((max - specData[32760 - i]) / (max - min) * 64);
+//                            if(res < 12) picture[i] = (0xFF << 24) | colorMap[res];
+//                            else picture[i] = (0x00 << 24) | colorMap[res];
+//                        }
+//                        soundbitmap = Bitmap.createBitmap(picture, 181, 181, Bitmap.Config.ARGB_8888);
+//                        Matrix mx = new Matrix();
+//                        mx.postScale(-1, 1);
+//                        soundbitmap = Bitmap.createBitmap(soundbitmap, 0, 0, soundbitmap.getWidth(), soundbitmap.getHeight(), mx, false);
 //                        soundbitmap = Bitmap.createScaledBitmap(soundbitmap,imageWidth,imageWidth,false);
                     }
                     AudioCapture.close();
@@ -299,6 +320,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onStreamUpdate(byte[] frameByte, int format, int width, int height) {
 //                    Log.v(TAG,"----onStreamUpdate(); width:"+width + ";height:"+height);
+                    mBitmap = drawSoundLocation();
                     SendMessage(0x00);
                 }
             });
@@ -341,6 +363,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void showToast(int textId){
         Toast.makeText(getApplicationContext(),getResources().getString(textId),Toast.LENGTH_SHORT).show();
+    }
+
+    public Bitmap drawSoundLocation()
+    {
+        Bitmap newmap = Bitmap.createBitmap(MyConstants.DEFAULT_USB_CAM_WIDTH, MyConstants.DEFAULT_USB_CAM_HEIGHT, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newmap);
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(1);
+        canvas.drawBitmap(mUsbCameraModule.mBitmap,0,0,null);
+        for(int i = 15 ; i > 0 ; --i) {
+            paint.setColor((0xFF << 24) | colorMap[i+2]);
+            canvas.drawCircle(xCoordinate, yCoordinate, i, paint);
+        }
+        return newmap;
     }
 
     public static Bitmap combineBitmap(Bitmap background, Bitmap foreground)

@@ -2,7 +2,7 @@
  * File: repmat.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Nov-2021 11:11:15
+ * C/C++ source code generated on  : 17-Nov-2021 10:34:49
  */
 
 /* Include Files */
@@ -13,10 +13,10 @@
 
 /* Function Definitions */
 /*
- * Arguments    : double b[11793960]
+ * Arguments    : double b[1814760]
  * Return Type  : void
  */
-void b_repmat(double b[11793960])
+void b_repmat(double b[1814760])
 {
   static const double b_dv[360] = {-0.023999999999999997,
                                    0.0,
@@ -383,7 +383,7 @@ void b_repmat(double b[11793960])
   int ibtile;
   int jcol;
   int jtilecol;
-  for (jtilecol = 0; jtilecol < 32761; jtilecol++) {
+  for (jtilecol = 0; jtilecol < 5041; jtilecol++) {
     ibtile = jtilecol * 360 - 1;
     for (jcol = 0; jcol < 120; jcol++) {
       iacol = jcol * 3;
@@ -396,25 +396,25 @@ void b_repmat(double b[11793960])
 }
 
 /*
- * Arguments    : double b[3931320]
+ * Arguments    : double b[604920]
  * Return Type  : void
  */
-void c_repmat(double b[3931320])
+void c_repmat(double b[604920])
 {
   int ibtile;
   int jtilecol;
-  for (jtilecol = 0; jtilecol < 32761; jtilecol++) {
+  for (jtilecol = 0; jtilecol < 5041; jtilecol++) {
     ibtile = jtilecol * 120;
     memcpy(&b[ibtile], &dv[0], 120U * sizeof(double));
   }
 }
 
 /*
- * Arguments    : const double a[98283]
- *                double b[11793960]
+ * Arguments    : const double a[15123]
+ *                double b[1814760]
  * Return Type  : void
  */
-void repmat(const double a[98283], double b[11793960])
+void repmat(const double a[15123], double b[1814760])
 {
   int iacol;
   int ibmat;
@@ -422,8 +422,8 @@ void repmat(const double a[98283], double b[11793960])
   int jcol;
   int jtilecol;
   for (jtilecol = 0; jtilecol < 120; jtilecol++) {
-    ibtile = jtilecol * 98283 - 1;
-    for (jcol = 0; jcol < 32761; jcol++) {
+    ibtile = jtilecol * 15123 - 1;
+    for (jcol = 0; jcol < 5041; jcol++) {
       iacol = jcol * 3;
       ibmat = ibtile + jcol * 3;
       b[ibmat + 1] = a[iacol];

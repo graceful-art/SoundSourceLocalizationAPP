@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="640dp"
-        android:layout_height="480dp"
+        android:layout_width="600dp"
+        android:layout_height="450dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/TextureView1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -2,7 +2,7 @@
  * File: sort.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Nov-2021 11:11:15
+ * C/C++ source code generated on  : 17-Nov-2021 10:34:49
  */
 
 /* Include Files */
@@ -14,18 +14,18 @@
 
 /* Function Definitions */
 /*
- * Arguments    : double x[32761]
- *                int idx[32761]
+ * Arguments    : double x[5041]
+ *                int idx[5041]
  * Return Type  : void
  */
-void sort(double x[32761], int idx[32761])
+void sort(double x[5041], int idx[5041])
 {
-  static double xwork[32761];
+  double xwork[5041];
   double b_xwork[256];
   double x4[4];
   double d;
   double d1;
-  int iwork[32761];
+  int iwork[5041];
   int b;
   int bLen;
   int bLen2;
@@ -52,14 +52,14 @@ void sort(double x[32761], int idx[32761])
   idx4[2] = 0;
   x4[3] = 0.0;
   idx4[3] = 0;
-  memset(&idx[0], 0, 32761U * sizeof(int));
-  memset(&xwork[0], 0, 32761U * sizeof(double));
+  memset(&idx[0], 0, 5041U * sizeof(int));
+  memset(&xwork[0], 0, 5041U * sizeof(double));
   nNaNs = 0;
   ib = 0;
-  for (k = 0; k < 32761; k++) {
+  for (k = 0; k < 5041; k++) {
     if (rtIsNaN(x[k])) {
-      idx[32760 - nNaNs] = k + 1;
-      xwork[32760 - nNaNs] = x[k];
+      idx[5040 - nNaNs] = k + 1;
+      xwork[5040 - nNaNs] = x[k];
       nNaNs++;
     } else {
       ib++;
@@ -177,29 +177,29 @@ void sort(double x[32761], int idx[32761])
     }
     for (k = 0; k < ib; k++) {
       i2 = perm[k] - 1;
-      i1 = ((k - nNaNs) - ib) + 32761;
+      i1 = ((k - nNaNs) - ib) + 5041;
       idx[i1] = idx4[i2];
       x[i1] = x4[i2];
     }
   }
-  i1 = (nNaNs >> 1) + 32761;
-  for (k = 0; k <= i1 - 32762; k++) {
-    ib = (k - nNaNs) + 32761;
+  i1 = (nNaNs >> 1) + 5041;
+  for (k = 0; k <= i1 - 5042; k++) {
+    ib = (k - nNaNs) + 5041;
     i2 = idx[ib];
-    idx[ib] = idx[32760 - k];
-    idx[32760 - k] = i2;
-    x[ib] = xwork[32760 - k];
-    x[32760 - k] = xwork[ib];
+    idx[ib] = idx[5040 - k];
+    idx[5040 - k] = i2;
+    x[ib] = xwork[5040 - k];
+    x[5040 - k] = xwork[ib];
   }
   if ((nNaNs & 1) != 0) {
     ib = i1 - nNaNs;
     x[ib] = xwork[ib];
   }
-  memset(&iwork[0], 0, 32761U * sizeof(int));
-  nNonNaN = 32761 - nNaNs;
+  memset(&iwork[0], 0, 5041U * sizeof(int));
+  nNonNaN = 5041 - nNaNs;
   ib = 2;
-  if (32761 - nNaNs > 1) {
-    nBlocks = (32761 - nNaNs) >> 8;
+  if (5041 - nNaNs > 1) {
+    nBlocks = (5041 - nNaNs) >> 8;
     if (nBlocks > 0) {
       for (b = 0; b < nBlocks; b++) {
         i4 = (b << 8) - 1;
@@ -248,17 +248,17 @@ void sort(double x[32761], int idx[32761])
         }
       }
       ib = nBlocks << 8;
-      i1 = 32761 - (nNaNs + ib);
+      i1 = 5041 - (nNaNs + ib);
       if (i1 > 0) {
         merge_block(idx, x, ib, i1, 2, iwork, xwork);
       }
       ib = 8;
     }
-    merge_block(idx, x, 0, 32761 - nNaNs, ib, iwork, xwork);
+    merge_block(idx, x, 0, 5041 - nNaNs, ib, iwork, xwork);
   }
-  if ((nNaNs > 0) && (32761 - nNaNs > 0)) {
+  if ((nNaNs > 0) && (5041 - nNaNs > 0)) {
     for (k = 0; k < nNaNs; k++) {
-      ib = (k - nNaNs) + 32761;
+      ib = (k - nNaNs) + 5041;
       xwork[k] = x[ib];
       iwork[k] = idx[ib];
     }

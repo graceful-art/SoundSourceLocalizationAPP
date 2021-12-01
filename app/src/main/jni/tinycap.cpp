@@ -85,9 +85,9 @@ static int tinycap(unsigned int mcard, unsigned int mdevice, unsigned int mtime)
     struct wav_header header;
     unsigned int card = 0;
     unsigned int device = 0;
-    unsigned int channels = 18;
+    unsigned int channels = 16;
     unsigned int rate = 48000;
-    unsigned int bits = 16;
+    unsigned int bits = 32;
     unsigned int frames;
     unsigned int period_size = 48;
     unsigned int period_count = 1;
@@ -208,9 +208,9 @@ unsigned int capture_sample(FILE *file, unsigned int card, unsigned int device,
         else bytes_read += size;
         FILE *file1;
         file1 = fopen("/data/data/com.company.ssl/record.txt", "wb");
-        char buf[10];
-        short * res = (short*)buffer;
-        for(int i=0;i<13824;++i) {
+        char buf[15];
+        int * res = (int*)buffer;
+        for(int i=0;i<size/4;++i) {
             sprintf(buf,"%d\r\n",*(res+i) );
             fwrite(buf,1,strlen(buf),file1);
         }
@@ -232,9 +232,9 @@ static int open(void)
 {
     unsigned int card = 3;
     unsigned int device = 0;
-    unsigned int channels = 18;
+    unsigned int channels = 16;
     unsigned int rate = 48000;
-    unsigned int bits = 16;
+    unsigned int bits = 32;
     unsigned int period_size = 48;
     unsigned int period_count = 16;
     enum pcm_format format;
@@ -290,10 +290,10 @@ static int read(void)
         return 1;
     }
     FILE *file1;
-    char buf[10];
-    short * buffer1 = (short*)buffer;
+    char buf[15];
+    int * buffer1 = (int*)buffer;
     file1 = fopen("/data/data/com.company.ssl/record.txt", "wb");
-    for(int i=0;i<size/2;++i) {
+    for(int i=0;i<size/4;++i) {
         sprintf(buf,"%d\r\n",*(buffer1+i) );
         fwrite(buf,1,strlen(buf),file1);
     }
@@ -318,7 +318,7 @@ extern "C"
     JNIEXPORT jint JNICALL Java_com_company_ssl_AudioCapture_open(JNIEnv *env, jobject obj) {
         return open();
     }
-    JNIEXPORT jint JNICALL Java_com_company_ssl_AudioCapture_read(JNIEnv *env, jobject obj, jdoubleArray specData) {
+    JNIEXPORT jint JNICALL Java_com_company_ssl_AudioCapture_read(JNIEnv *env, jobject obj, jdoubleArray expectedData) {
         if(pcm_read(pcm, buffer, size)) {
             LOGD("Error capturing sample\n");
             return 1;
@@ -329,7 +329,7 @@ extern "C"
 //        short * buffer1 = (short*)buffer;
 //        sprintf(buf,"/data/data/com.company.ssl/record%d.txt",count);
 //        file1 = fopen(buf, "wb");
-//        for(int i=0;i<size/2;++i) {
+//        for(int i=0;i<size/4;++i) {
 //            sprintf(buf,"%d\r\n",*(buffer1+i) );
 //            fwrite(buf,1,strlen(buf),file1);
 //        }
@@ -346,7 +346,7 @@ extern "C"
 
     duration = (double)(finish - start) / CLOCKS_PER_SEC;
     LOGD("Time:%f ",duration);
-        env->SetDoubleArrayRegion(specData, 0, 32761, res);
+        env->SetDoubleArrayRegion(expectedData, 0, 2, res);
         return 0;
     }
     JNIEXPORT void JNICALL Java_com_company_ssl_AudioCapture_close(JNIEnv *env, jobject obj) {

@@ -2,7 +2,7 @@
  * File: MBSS_locate_spec.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Nov-2021 11:11:15
+ * C/C++ source code generated on  : 17-Nov-2021 10:34:49
  */
 
 #ifndef MBSS_LOCATE_SPEC_H
@@ -18,9 +18,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void MBSS_findPeaks2D(const double ppfSpec[32761],
-                      const double piAzimutGrid[32761],
-                      const double piElevationGrid[32761],
+void MBSS_findPeaks2D(const double ppfSpec[5041],
+                      const double piAzimutGrid[5041],
+                      const double piElevationGrid[5041],
                       double pfEstAngles[2]);
 
 #ifdef __cplusplus

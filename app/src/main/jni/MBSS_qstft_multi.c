@@ -2,7 +2,7 @@
  * File: MBSS_qstft_multi.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Nov-2021 11:11:15
+ * C/C++ source code generated on  : 17-Nov-2021 10:34:49
  */
 
 /* Include Files */
@@ -41,7 +41,7 @@
  * Arguments    : creal_T Cx[131584]
  * Return Type  : void
  */
-void MBSS_qstft_multi(short b_x[12288],creal_T Cx[131584])
+void MBSS_qstft_multi(int b_x[12288],creal_T Cx[131584])
 {
   static const double b_dv[512] = {
       0.0030679615757712823, 0.009203884727313847, 0.015339807878856412,
