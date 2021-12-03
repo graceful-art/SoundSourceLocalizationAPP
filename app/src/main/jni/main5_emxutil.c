@@ -2,7 +2,7 @@
  * File: main5_emxutil.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 17-Nov-2021 10:34:49
+ * C/C++ source code generated on  : 03-Dec-2021 11:09:20
  */
 
 /* Include Files */
@@ -98,22 +98,22 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
 }
 
 /*
- * Arguments    : cell_wrap_2 pMatrix[120]
+ * Arguments    : cell_wrap_0 pMatrix[120]
  * Return Type  : void
  */
-void emxFreeMatrix_cell_wrap_2(cell_wrap_2 pMatrix[120])
+void emxFreeMatrix_cell_wrap_0(cell_wrap_0 pMatrix[120])
 {
   int i;
   for (i = 0; i < 120; i++) {
-    emxFreeStruct_cell_wrap_2(&pMatrix[i]);
+    emxFreeStruct_cell_wrap_0(&pMatrix[i]);
   }
 }
 
 /*
- * Arguments    : cell_wrap_2 *pStruct
+ * Arguments    : cell_wrap_0 *pStruct
  * Return Type  : void
  */
-void emxFreeStruct_cell_wrap_2(cell_wrap_2 *pStruct)
+void emxFreeStruct_cell_wrap_0(cell_wrap_0 *pStruct)
 {
   emxFree_real_T(&pStruct->f1);
 }
@@ -151,22 +151,22 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
 }
 
 /*
- * Arguments    : cell_wrap_2 pMatrix[120]
+ * Arguments    : cell_wrap_0 pMatrix[120]
  * Return Type  : void
  */
-void emxInitMatrix_cell_wrap_2(cell_wrap_2 pMatrix[120])
+void emxInitMatrix_cell_wrap_0(cell_wrap_0 pMatrix[120])
 {
   int i;
   for (i = 0; i < 120; i++) {
-    emxInitStruct_cell_wrap_2(&pMatrix[i]);
+    emxInitStruct_cell_wrap_0(&pMatrix[i]);
   }
 }
 
 /*
- * Arguments    : cell_wrap_2 *pStruct
+ * Arguments    : cell_wrap_0 *pStruct
  * Return Type  : void
  */
-void emxInitStruct_cell_wrap_2(cell_wrap_2 *pStruct)
+void emxInitStruct_cell_wrap_0(cell_wrap_0 *pStruct)
 {
   emxInit_real_T(&pStruct->f1, 2);
 }
