@@ -232,9 +232,9 @@ static int open(void)
 {
     unsigned int card = 3;
     unsigned int device = 0;
-    unsigned int channels = 16;
+    unsigned int channels = 18;
     unsigned int rate = 48000;
-    unsigned int bits = 32;
+    unsigned int bits = 16;
     unsigned int period_size = 48;
     unsigned int period_count = 16;
     enum pcm_format format;

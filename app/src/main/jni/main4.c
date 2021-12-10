@@ -1174,26 +1174,27 @@ double* main4(char *buffer,int size)
     /*  Compute the frequency axis */
     /*  frequency bins used for the aggregative part */
     /*  Compute the search grid */
-
-    /*for (i = 0; i < L; i++) {
+    short* res = (short*)buffer;
+    int dv1[12288];
+    for (i = 0; i < L; i++) {
         i1 = i << 4;
-        dv1[i1] = *(res + i*16);
-        dv1[i1 + 1] = *(res + i*16 + 1);
-        dv1[i1 + 2] = *(res + i*16 + 2);
-        dv1[i1 + 3] = *(res + i*16 + 3);
-        dv1[i1 + 4] = *(res + i*16 + 4);
-        dv1[i1 + 5] = *(res + i*16 + 5);
-        dv1[i1 + 6] = *(res + i*16 + 6);
-        dv1[i1 + 7] = *(res + i*16 + 7);
-        dv1[i1 + 8] = *(res + i*16 + 8);
-        dv1[i1 + 9] = *(res + i*16 + 9);
-        dv1[i1 + 10] = *(res + i*16 + 10);
-        dv1[i1 + 11] = *(res + i*16 + 11);
-        dv1[i1 + 12] = *(res + i*16 + 12);
-        dv1[i1 + 13] = *(res + i*16 + 13);
-        dv1[i1 + 14] = *(res + i*16 + 14);
-        dv1[i1 + 15] = *(res + i*16 + 15);
-    }*/
+        dv1[i1] = *(res + i*18);
+        dv1[i1 + 1] = *(res + i*18 + 1);
+        dv1[i1 + 2] = *(res + i*18 + 2);
+        dv1[i1 + 3] = *(res + i*18 + 3);
+        dv1[i1 + 4] = *(res + i*18 + 4);
+        dv1[i1 + 5] = *(res + i*18 + 5);
+        dv1[i1 + 6] = *(res + i*18 + 6);
+        dv1[i1 + 7] = *(res + i*18 + 7);
+        dv1[i1 + 8] = *(res + i*18 + 8);
+        dv1[i1 + 9] = *(res + i*18 + 9);
+        dv1[i1 + 10] = *(res + i*18 + 10);
+        dv1[i1 + 11] = *(res + i*18 + 11);
+        dv1[i1 + 12] = *(res + i*18 + 12);
+        dv1[i1 + 13] = *(res + i*18 + 13);
+        dv1[i1 + 14] = *(res + i*18 + 14);
+        dv1[i1 + 15] = *(res + i*18 + 15);
+    }
 
 
     emxInitMatrix_cell_wrap_2(alphaSampled);
@@ -1205,7 +1206,7 @@ double* main4(char *buffer,int size)
     /*  */
     /*  Init the  output structure */
     /*  Linear transform */
-    MBSS_qstft_multi((int*)buffer, X);
+    MBSS_qstft_multi(dv1, X);
     /*  Output matrix init */
     /*  estimated azimuth in degrees */
     /*  estimated elevation in degrees */
