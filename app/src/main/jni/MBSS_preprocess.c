@@ -2,7 +2,7 @@
  * File: MBSS_preprocess.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 17-Nov-2021 10:34:49
+ * C/C++ source code generated on  : 22-Dec-2021 11:13:57
  */
 
 /* Include Files */
@@ -54,15 +54,15 @@
  *
  *
  * Arguments    : double alpha[604920]
- *                cell_wrap_2 alphaSampled[120]
- *                cell_wrap_2 tauGrid[120]
+ *                cell_wrap_0 alphaSampled[120]
+ *                cell_wrap_0 tauGrid[120]
  * Return Type  : void
  */
-void MBSS_preprocess(double alpha[604920], cell_wrap_2 alphaSampled[120],
-                     cell_wrap_2 tauGrid[120])
+void MBSS_preprocess(double alpha[604920], cell_wrap_0 alphaSampled[120],
+                     cell_wrap_0 tauGrid[120])
 {
   static creal_T dcv[604920];
-  static const double b_dv[5041] = { -2.1816615649929116, -2.1642082724729685,
+  static const double dv[5041] = { -2.1816615649929116, -2.1642082724729685,
     -2.1467549799530254, -2.1293016874330819, -2.1118483949131388,
     -2.0943951023931953, -2.0769418098732522, -2.0594885173533086,
     -2.0420352248333655, -2.0245819323134224, -2.0071286397934789,
@@ -3426,7 +3426,7 @@ void MBSS_preprocess(double alpha[604920], cell_wrap_2 alphaSampled[120],
   /*  Microphone direction vector (in xyz) for each pair */
   /*  Microphone distance for each pair */
   /*  Convert all tuple {theta,phi} on the sphere grid in cartesian coordinates */
-  sph2cart(b_dv, dv1, b_alpha, dv2, dv3);
+  sph2cart(dv, dv1, b_alpha, dv2, dv3);
   for (k = 0; k < 5041; k++) {
     Pjk[3 * k] = b_alpha[k];
     Pjk[3 * k + 1] = dv2[k];

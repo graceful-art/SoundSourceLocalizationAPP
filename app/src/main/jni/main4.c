@@ -11,7 +11,9 @@
 #include "MBSS_locate_spec.h"
 #include "MBSS_preprocess.h"
 #include "MBSS_qstft_multi.h"
+#include "main5_data.h"
 #include "main5_emxutil.h"
+#include "main5_initialize.h"
 #include "main5_types.h"
 #include "permute.h"
 #include "rt_nonfinite.h"
@@ -1107,8 +1109,8 @@ double* main4(char *buffer,int size)
     static double alpha[604920];
     static double specInst[10082];
     static double specGlobal[5041];
-    cell_wrap_2 alphaSampled[120];
-    cell_wrap_2 tauGrid[120];
+    cell_wrap_0 alphaSampled[120];
+    cell_wrap_0 tauGrid[120];
     static double unusedExpr[2];
     double d;
     double d1;
@@ -1196,9 +1198,11 @@ double* main4(char *buffer,int size)
         dv1[i1 + 15] = *(res + i*18 + 15);
     }
 
-
-    emxInitMatrix_cell_wrap_2(alphaSampled);
-    emxInitMatrix_cell_wrap_2(tauGrid);
+    if (!isInitialized_main5) {
+        main5_initialize();
+    }
+    emxInitMatrix_cell_wrap_0(alphaSampled);
+    emxInitMatrix_cell_wrap_0(tauGrid);
 
     /*  all the mics */
     /*  Fill the structure */
@@ -1229,8 +1233,8 @@ double* main4(char *buffer,int size)
     MBSS_computeAngularSpectrum(alpha, alphaSampled, tauGrid, dcv, specInst);
     /*  Normalize instantaneous local angular spectra if requested */
     /*  Pooling */
-    emxFreeMatrix_cell_wrap_2(tauGrid);
-    emxFreeMatrix_cell_wrap_2(alphaSampled);
+    emxFreeMatrix_cell_wrap_0(tauGrid);
+    emxFreeMatrix_cell_wrap_0(alphaSampled);
     for (i = 0; i < 5041; i++) {
         d = specInst[i];
         specGlobal[i] = d;

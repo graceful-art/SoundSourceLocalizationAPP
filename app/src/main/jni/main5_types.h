@@ -2,7 +2,7 @@
  * File: main5_types.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 17-Nov-2021 10:34:49
+ * C/C++ source code generated on  : 22-Dec-2021 11:13:57
  */
 
 #ifndef MAIN5_TYPES_H
@@ -27,12 +27,12 @@ struct emxArray_real_T {
 typedef struct emxArray_real_T emxArray_real_T;
 #endif /* typedef_emxArray_real_T */
 
-#ifndef typedef_cell_wrap_2
-#define typedef_cell_wrap_2
+#ifndef typedef_cell_wrap_0
+#define typedef_cell_wrap_0
 typedef struct {
   emxArray_real_T *f1;
-} cell_wrap_2;
-#endif /* typedef_cell_wrap_2 */
+} cell_wrap_0;
+#endif /* typedef_cell_wrap_0 */
 
 #ifndef typedef_emxArray_creal_T
 #define typedef_emxArray_creal_T

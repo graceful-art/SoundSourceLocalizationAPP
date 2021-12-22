@@ -2,11 +2,12 @@
  * File: main5_initialize.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 17-Nov-2021 10:34:49
+ * C/C++ source code generated on  : 22-Dec-2021 11:13:57
  */
 
 /* Include Files */
 #include "main5_initialize.h"
+#include "main5_data.h"
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
@@ -16,6 +17,8 @@
  */
 void main5_initialize(void)
 {
+  rt_InitInfAndNaN();
+  isInitialized_main5 = true;
 }
 
 /*
