@@ -1,12 +1,12 @@
 /*
- * File: sortIdx.h
+ * File: nchoosek.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 22-Dec-2021 14:18:57
  */
 
-#ifndef SORTIDX_H
-#define SORTIDX_H
+#ifndef NCHOOSEK_H
+#define NCHOOSEK_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,8 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void merge_block(int idx[5041], double x[5041], int offset, int n,
-                 int preSortLevel, int iwork[5041], double xwork[5041]);
+void nchoosek(const double x[16], double y[240]);
 
 #ifdef __cplusplus
 }
@@ -27,7 +26,7 @@ void merge_block(int idx[5041], double x[5041], int offset, int n,
 
 #endif
 /*
- * File trailer for sortIdx.h
+ * File trailer for nchoosek.h
  *
  * [EOF]
  */

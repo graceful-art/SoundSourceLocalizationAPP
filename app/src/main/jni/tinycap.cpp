@@ -235,7 +235,7 @@ static int open(void)
     unsigned int channels = 18;
     unsigned int rate = 48000;
     unsigned int bits = 16;
-    unsigned int period_size = 48;
+    unsigned int period_size = 128;
     unsigned int period_count = 16;
     enum pcm_format format;
 

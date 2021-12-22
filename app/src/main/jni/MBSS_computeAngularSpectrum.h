@@ -2,7 +2,7 @@
  * File: MBSS_computeAngularSpectrum.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 22-Dec-2021 11:13:57
+ * C/C++ source code generated on  : 22-Dec-2021 14:18:57
  */
 
 #ifndef MBSS_COMPUTEANGULARSPECTRUM_H
@@ -22,8 +22,8 @@ extern "C" {
 void MBSS_computeAngularSpectrum(const double alpha[604920],
                                  const cell_wrap_0 alphaSampled[120],
                                  const cell_wrap_0 tauGrid[120],
-                                 const creal_T X[131072],
-                                 double specInst[10082]);
+                                 const creal_T X[393216],
+                                 double specInst[15123]);
 
 #ifdef __cplusplus
 }

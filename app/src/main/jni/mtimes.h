@@ -1,14 +1,15 @@
 /*
- * File: sortIdx.h
+ * File: mtimes.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 22-Dec-2021 14:18:57
  */
 
-#ifndef SORTIDX_H
-#define SORTIDX_H
+#ifndef MTIMES_H
+#define MTIMES_H
 
 /* Include Files */
+#include "main5_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,8 +19,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void merge_block(int idx[5041], double x[5041], int offset, int n,
-                 int preSortLevel, int iwork[5041], double xwork[5041]);
+void mtimes(const emxArray_creal_T *A, const emxArray_creal_T *B,
+            creal_T C[256]);
 
 #ifdef __cplusplus
 }
@@ -27,7 +28,7 @@ void merge_block(int idx[5041], double x[5041], int offset, int n,
 
 #endif
 /*
- * File trailer for sortIdx.h
+ * File trailer for mtimes.h
  *
  * [EOF]
  */

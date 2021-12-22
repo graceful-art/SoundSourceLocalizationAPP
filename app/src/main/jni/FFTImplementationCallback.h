@@ -2,7 +2,7 @@
  * File: FFTImplementationCallback.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 22-Dec-2021 11:13:57
+ * C/C++ source code generated on  : 22-Dec-2021 14:18:57
  */
 
 #ifndef FFTIMPLEMENTATIONCALLBACK_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void c_FFTImplementationCallback_doH(const double x[512], creal_T y[512]);
+void c_FFTImplementationCallback_doH(const double x[1024], creal_T y[1024]);
 
 #ifdef __cplusplus
 }

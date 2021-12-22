@@ -1,12 +1,12 @@
 /*
- * File: sortIdx.h
+ * File: MBSS_stft_multi.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 22-Dec-2021 14:18:57
  */
 
-#ifndef SORTIDX_H
-#define SORTIDX_H
+#ifndef MBSS_STFT_MULTI_H
+#define MBSS_STFT_MULTI_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,8 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void merge_block(int idx[5041], double x[5041], int offset, int n,
-                 int preSortLevel, int iwork[5041], double xwork[5041]);
+void MBSS_stft_multi(const double x[32768], creal_T X[24624]);
 
 #ifdef __cplusplus
 }
@@ -27,7 +26,7 @@ void merge_block(int idx[5041], double x[5041], int offset, int n,
 
 #endif
 /*
- * File trailer for sortIdx.h
+ * File trailer for MBSS_stft_multi.h
  *
  * [EOF]
  */

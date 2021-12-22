@@ -2,7 +2,7 @@
  * File: MBSS_qstft_multi.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 22-Dec-2021 11:13:57
+ * C/C++ source code generated on  : 22-Dec-2021 14:18:57
  */
 
 #ifndef MBSS_QSTFT_MULTI_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void MBSS_qstft_multi(int b_x[12288],creal_T Cx[131584]);
+void MBSS_qstft_multi(double dv[32768],creal_T Cx[393984]);
 
 #ifdef __cplusplus
 }
