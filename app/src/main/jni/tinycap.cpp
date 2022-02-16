@@ -86,10 +86,10 @@ static int tinycap(unsigned int mcard, unsigned int mdevice, unsigned int mtime)
     unsigned int card = 0;
     unsigned int device = 0;
     unsigned int channels = 16;
-    unsigned int rate = 48000;
-    unsigned int bits = 32;
+    unsigned int rate = 96000;
+    unsigned int bits = 16;
     unsigned int frames;
-    unsigned int period_size = 48;
+    unsigned int period_size = 96;
     unsigned int period_count = 1;
     enum pcm_format format;
     int no_header = 0;
@@ -200,24 +200,26 @@ unsigned int capture_sample(FILE *file, unsigned int card, unsigned int device,
            pcm_format_to_bits(format));
     }
 
-//    while (capturing && !pcm_read(pcm, buffer, size)) {
-    if(!pcm_read(pcm, buffer, size)) {
+    int count=0;
+    while (count<1000 && !pcm_read(pcm, buffer, size)) {
+//    if(!pcm_read(pcm, buffer, size)) {
         if (fwrite(buffer, 1, size, file) != size) {
             LOGD("Error writing file\n");
         }
         else bytes_read += size;
-        FILE *file1;
-        file1 = fopen("/data/data/com.company.ssl/record.txt", "wb");
-        char buf[15];
-        int * res = (int*)buffer;
-        for(int i=0;i<size/4;++i) {
-            sprintf(buf,"%d\r\n",*(res+i) );
-            fwrite(buf,1,strlen(buf),file1);
-        }
-        fclose(file1);
-    }
-    else {
-        LOGD("Error capturing sample\n");
+        count++;
+//        FILE *file1;
+//        file1 = fopen("/data/data/com.company.ssl/record.txt", "wb");
+//        char buf[15];
+//        int * res = (int*)buffer;
+//        for(int i=0;i<size/4;++i) {
+//            sprintf(buf,"%d\r\n",*(res+i) );
+//            fwrite(buf,1,strlen(buf),file1);
+//        }
+//        fclose(file1);
+//    }
+//    else {
+//        LOGD("Error capturing sample\n");
     }
 
     free(buffer);
@@ -233,10 +235,10 @@ static int open(void)
     unsigned int card = 3;
     unsigned int device = 0;
     unsigned int channels = 16;
-    unsigned int rate = 48000;
-    unsigned int bits = 32;
-    unsigned int period_size = 48;
-    unsigned int period_count = 16;
+    unsigned int rate = 96000;
+    unsigned int bits = 16;
+    unsigned int period_size = 1024;
+    unsigned int period_count = 4;
     enum pcm_format format;
 
     switch (bits) {

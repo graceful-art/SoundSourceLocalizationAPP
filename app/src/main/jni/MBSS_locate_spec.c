@@ -2,7 +2,7 @@
  * File: MBSS_locate_spec.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Dec-2021 11:09:20
+ * C/C++ source code generated on  : 12-Feb-2022 13:36:32
  */
 
 /* Include Files */
@@ -134,6 +134,7 @@ void MBSS_findPeaks2D(const double ppfSpec[5041],
   /*  first source is the global maximum (first one in piSortedPeaksIndex1D) */
   /*  search index in piSortedPeaksIndex1D */
   /*  set to one as global maximum is already selected as source */
+  /* Filter the list of peaks found with respect to minAngle parameter */
   idx = (int)ppfSpec2D[0] - 1;
   pfEstAngles[0] = piAzimutGrid[idx];
   pfEstAngles[1] = piElevationGrid[idx];

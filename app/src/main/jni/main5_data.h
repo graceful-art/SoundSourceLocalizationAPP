@@ -2,7 +2,7 @@
  * File: main5_data.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Dec-2021 11:09:20
+ * C/C++ source code generated on  : 12-Feb-2022 13:36:32
  */
 
 #ifndef MAIN5_DATA_H
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 /* Variable Declarations */
-extern const double dv[120];
+extern boolean_T isInitialized_main5;
 
 #endif
 /*

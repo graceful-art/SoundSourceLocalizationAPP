@@ -1,12 +1,12 @@
 /*
- * File: MBSS_preprocess.h
+ * File: mtimes.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 12-Feb-2022 13:36:32
  */
 
-#ifndef MBSS_PREPROCESS_H
-#define MBSS_PREPROCESS_H
+#ifndef MTIMES_H
+#define MTIMES_H
 
 /* Include Files */
 #include "main5_types.h"
@@ -19,8 +19,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void MBSS_preprocess(double alpha[604920], cell_wrap_0 alphaSampled[120],
-                     cell_wrap_0 tauGrid[120]);
+void mtimes(const emxArray_creal_T *A, const emxArray_creal_T *B,
+            creal_T C[256]);
 
 #ifdef __cplusplus
 }
@@ -28,7 +28,7 @@ void MBSS_preprocess(double alpha[604920], cell_wrap_0 alphaSampled[120],
 
 #endif
 /*
- * File trailer for MBSS_preprocess.h
+ * File trailer for mtimes.h
  *
  * [EOF]
  */

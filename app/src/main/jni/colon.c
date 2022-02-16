@@ -2,13 +2,14 @@
  * File: colon.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Dec-2021 11:09:20
+ * C/C++ source code generated on  : 12-Feb-2022 13:36:32
  */
 
 /* Include Files */
 #include "colon.h"
 #include "main5_emxutil.h"
 #include "main5_types.h"
+#include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -24,13 +25,20 @@ void eml_float_colon(double a, double b, emxArray_real_T *y)
   double apnd;
   double cdiff;
   double ndbl;
+  double u0;
+  double u1;
   int k;
   int n;
   int nm1d2;
   ndbl = floor((b - a) / 5.0 + 0.5);
   apnd = a + ndbl * 5.0;
   cdiff = apnd - b;
-  if (fabs(cdiff) < 4.4408920985006262E-16 * fmax(fabs(a), fabs(b))) {
+  u0 = fabs(a);
+  u1 = fabs(b);
+  if ((u0 > u1) || rtIsNaN(u1)) {
+    u1 = u0;
+  }
+  if (fabs(cdiff) < 4.4408920985006262E-16 * u1) {
     ndbl++;
     apnd = b;
   } else if (cdiff > 0.0) {

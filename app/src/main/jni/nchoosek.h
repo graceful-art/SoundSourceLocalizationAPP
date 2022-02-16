@@ -1,31 +1,32 @@
 /*
- * File: rtGetInf.h
+ * File: nchoosek.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 12-Feb-2022 13:36:32
  */
 
-#ifndef RTGETINF_H
-#define RTGETINF_H
+#ifndef NCHOOSEK_H
+#define NCHOOSEK_H
 
 /* Include Files */
 #include "rtwtypes.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-extern real_T rtGetInf(void);
-extern real32_T rtGetInfF(void);
-extern real_T rtGetMinusInf(void);
-extern real32_T rtGetMinusInfF(void);
+/* Function Declarations */
+void nchoosek(const double x[16], double y[240]);
 
 #ifdef __cplusplus
 }
 #endif
+
 #endif
 /*
- * File trailer for rtGetInf.h
+ * File trailer for nchoosek.h
  *
  * [EOF]
  */

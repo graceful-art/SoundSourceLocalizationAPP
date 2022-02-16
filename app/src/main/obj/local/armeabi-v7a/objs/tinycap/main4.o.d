@@ -8,7 +8,8 @@
   E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stdlib.h \
   jni\MBSS_computeAngularSpectrum.h jni\main5_types.h \
   jni\MBSS_locate_spec.h jni\MBSS_preprocess.h jni\MBSS_qstft_multi.h \
-  jni\main5_emxutil.h jni\permute.h jni\rt_nonfinite.h \
+  jni\main5_data.h jni\main5_emxutil.h jni\main5_initialize.h \
+  jni\permute.h jni\rt_nonfinite.h \
   E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\string.h
 
 jni\main4.h:
@@ -39,7 +40,11 @@ jni\MBSS_preprocess.h:
 
 jni\MBSS_qstft_multi.h:
 
+jni\main5_data.h:
+
 jni\main5_emxutil.h:
+
+jni\main5_initialize.h:
 
 jni\permute.h:
 
