@@ -169,11 +169,9 @@ public class MainActivity extends AppCompatActivity {
                         if (AudioCapture.read(expectedData) > 0) {
                             break;
                         }
-                        expectedData[0] = tan(PI * (-90-expectedData[0]) / 180);
-                        expectedData[1] = tan(PI * expectedData[1] /180);
-                        y = 1/sqrt(1+pow(expectedData[0],2)+pow(expectedData[1],2));
-                        x = -expectedData[0]*y;
-                        z = expectedData[1]*y;
+                        x = cos(PI * expectedData[0] /180) * cos(PI * expectedData[1] /180);
+                        y = -sin(PI * expectedData[0] /180) * cos(PI * expectedData[1] /180);
+                        z = sin(PI * expectedData[1] /180);
                         xCoordinate = (int)round((x*collectMatrix[0]+y*collectMatrix[1]+z*collectMatrix[2]+collectMatrix[3])/y);
                         yCoordinate = (int)round((x*collectMatrix[4]+y*collectMatrix[5]+z*collectMatrix[6]+collectMatrix[7])/y);
 //                        double max = -10000, min = 10000;
