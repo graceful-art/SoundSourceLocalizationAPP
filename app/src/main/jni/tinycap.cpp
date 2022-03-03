@@ -238,7 +238,7 @@ static int open(void)
     unsigned int rate = 96000;
     unsigned int bits = 16;
     unsigned int period_size = 1024;
-    unsigned int period_count = 4;
+    unsigned int period_count = 8;
     enum pcm_format format;
 
     switch (bits) {

@@ -2,7 +2,7 @@
  * File: permute.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Feb-2022 13:36:32
+ * C/C++ source code generated on  : 03-Mar-2022 10:30:32
  */
 
 #ifndef PERMUTE_H
@@ -20,7 +20,7 @@ extern "C" {
 /* Function Declarations */
 void b_permute(const double a[1814760], double b[1814760]);
 
-void permute(const creal_T a[786432], creal_T b[786432]);
+void permute(const creal_T a[1572864], creal_T b[1572864]);
 
 #ifdef __cplusplus
 }
