@@ -232,7 +232,7 @@ char *buffer;
 unsigned int size;
 static int open(void)
 {
-    unsigned int card = 5;
+    unsigned int card = 3;
     unsigned int device = 0;
     unsigned int channels = 16;
     unsigned int rate = 96000;
