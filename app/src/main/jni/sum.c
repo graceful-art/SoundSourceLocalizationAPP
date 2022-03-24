@@ -2,7 +2,7 @@
  * File: sum.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Mar-2022 12:17:08
+ * C/C++ source code generated on  : 24-Mar-2022 14:32:31
  */
 
 /* Include Files */
@@ -11,15 +11,15 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const double x[1814760]
- *                double y[604920]
+ * Arguments    : const double x[466560]
+ *                double y[155520]
  * Return Type  : void
  */
-void sum(const double x[1814760], double y[604920])
+void sum(const double x[466560], double y[155520])
 {
   int xi;
   int xpageoffset;
-  for (xi = 0; xi < 604920; xi++) {
+  for (xi = 0; xi < 155520; xi++) {
     xpageoffset = xi * 3;
     y[xi] = (x[xpageoffset] + x[xpageoffset + 1]) + x[xpageoffset + 2];
   }

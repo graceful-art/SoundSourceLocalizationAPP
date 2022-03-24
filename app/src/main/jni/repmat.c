@@ -2,7 +2,7 @@
  * File: repmat.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Mar-2022 12:17:08
+ * C/C++ source code generated on  : 24-Mar-2022 14:32:31
  */
 
 /* Include Files */
@@ -12,10 +12,10 @@
 
 /* Function Definitions */
 /*
- * Arguments    : double b[1814760]
+ * Arguments    : double b[466560]
  * Return Type  : void
  */
-void b_repmat(double b[1814760])
+void b_repmat(double b[466560])
 {
   static const double dv[360] = {0.0088670000000000034,
                                  0.0,
@@ -382,7 +382,7 @@ void b_repmat(double b[1814760])
   int ibtile;
   int jcol;
   int jtilecol;
-  for (jtilecol = 0; jtilecol < 5041; jtilecol++) {
+  for (jtilecol = 0; jtilecol < 1296; jtilecol++) {
     ibtile = jtilecol * 360 - 1;
     for (jcol = 0; jcol < 120; jcol++) {
       iacol = jcol * 3;
@@ -395,10 +395,10 @@ void b_repmat(double b[1814760])
 }
 
 /*
- * Arguments    : double b[604920]
+ * Arguments    : double b[155520]
  * Return Type  : void
  */
-void c_repmat(double b[604920])
+void c_repmat(double b[155520])
 {
   static const double a[120] = {0.013656993007247242,
                                 0.026791309785077697,
@@ -522,18 +522,18 @@ void c_repmat(double b[604920])
                                 0.013653464651874996};
   int ibtile;
   int jtilecol;
-  for (jtilecol = 0; jtilecol < 5041; jtilecol++) {
+  for (jtilecol = 0; jtilecol < 1296; jtilecol++) {
     ibtile = jtilecol * 120;
     memcpy(&b[ibtile], &a[0], 120U * sizeof(double));
   }
 }
 
 /*
- * Arguments    : const double a[15123]
- *                double b[1814760]
+ * Arguments    : const double a[3888]
+ *                double b[466560]
  * Return Type  : void
  */
-void repmat(const double a[15123], double b[1814760])
+void repmat(const double a[3888], double b[466560])
 {
   int iacol;
   int ibmat;
@@ -541,8 +541,8 @@ void repmat(const double a[15123], double b[1814760])
   int jcol;
   int jtilecol;
   for (jtilecol = 0; jtilecol < 120; jtilecol++) {
-    ibtile = jtilecol * 15123 - 1;
-    for (jcol = 0; jcol < 5041; jcol++) {
+    ibtile = jtilecol * 3888 - 1;
+    for (jcol = 0; jcol < 1296; jcol++) {
       iacol = jcol * 3;
       ibmat = ibtile + jcol * 3;
       b[ibmat + 1] = a[iacol];

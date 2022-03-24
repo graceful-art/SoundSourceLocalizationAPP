@@ -159,44 +159,70 @@ public class MainActivity extends AppCompatActivity {
 //        boolean flag = upgradeRootPermission(getPackageCodePath());
 //        Log.d(TAG,"Upgrade Root Permission: "+flag);
 //        AudioCapture.tinycap();
+//        new Thread() {
+//            public void run() {
+//                while(true) {
+//                    AudioCapture.open();
+//                    double[] expectedData = new double[2];
+//                    double x,y,z;
+//                    while(true) {
+//                        if (AudioCapture.read(expectedData,0) > 0) {
+//                            break;
+//                        }
+//                        x = cos(PI * expectedData[0] /180) * cos(PI * expectedData[1] /180);
+//                        y = -sin(PI * expectedData[0] /180) * cos(PI * expectedData[1] /180);
+//                        z = sin(PI * expectedData[1] /180);
+//                        xCoordinate = (int)round((x*collectMatrix[0]+y*collectMatrix[1]+z*collectMatrix[2]+collectMatrix[3])/y);
+//                        yCoordinate = (int)round((x*collectMatrix[4]+y*collectMatrix[5]+z*collectMatrix[6]+collectMatrix[7])/y);
+////                        double max = -10000, min = 10000;
+////                        for (int i = 0; i < 32761; ++i) {
+////                            if (specData[i] > max) max = specData[i];
+////                            if (specData[i] < min) min = specData[i];
+////                        }
+////                        Log.d(TAG, "max:" + max + " min:" + min);
+////                        int[] picture = new int[32761];
+////                        int res;
+////                        for (int i = 0; i < 32761; ++i) {
+////                            res = (int) ((max - specData[32760 - i]) / (max - min) * 64);
+////                            if(res < 12) picture[i] = (0xFF << 24) | colorMap[res];
+////                            else picture[i] = (0x00 << 24) | colorMap[res];
+////                        }
+////                        soundbitmap = Bitmap.createBitmap(picture, 181, 181, Bitmap.Config.ARGB_8888);
+////                        Matrix mx = new Matrix();
+////                        mx.postScale(-1, 1);
+////                        soundbitmap = Bitmap.createBitmap(soundbitmap, 0, 0, soundbitmap.getWidth(), soundbitmap.getHeight(), mx, false);
+////                        soundbitmap = Bitmap.createScaledBitmap(soundbitmap,imageWidth,imageWidth,false);
+//                    }
+//                    AudioCapture.close();
+//                }
+//            }
+//        }.start();
+
+        AudioCapture.open();
         new Thread() {
             public void run() {
                 while(true) {
-                    AudioCapture.open();
                     double[] expectedData = new double[2];
-                    double x,y,z;
                     while(true) {
-                        if (AudioCapture.read(expectedData) > 0) {
+                        if (AudioCapture.read(expectedData, 0) > 0) {
                             break;
                         }
-                        x = cos(PI * expectedData[0] /180) * cos(PI * expectedData[1] /180);
-                        y = -sin(PI * expectedData[0] /180) * cos(PI * expectedData[1] /180);
-                        z = sin(PI * expectedData[1] /180);
-                        xCoordinate = (int)round((x*collectMatrix[0]+y*collectMatrix[1]+z*collectMatrix[2]+collectMatrix[3])/y);
-                        yCoordinate = (int)round((x*collectMatrix[4]+y*collectMatrix[5]+z*collectMatrix[6]+collectMatrix[7])/y);
-//                        double max = -10000, min = 10000;
-//                        for (int i = 0; i < 32761; ++i) {
-//                            if (specData[i] > max) max = specData[i];
-//                            if (specData[i] < min) min = specData[i];
-//                        }
-//                        Log.d(TAG, "max:" + max + " min:" + min);
-//                        int[] picture = new int[32761];
-//                        int res;
-//                        for (int i = 0; i < 32761; ++i) {
-//                            res = (int) ((max - specData[32760 - i]) / (max - min) * 64);
-//                            if(res < 12) picture[i] = (0xFF << 24) | colorMap[res];
-//                            else picture[i] = (0x00 << 24) | colorMap[res];
-//                        }
-//                        soundbitmap = Bitmap.createBitmap(picture, 181, 181, Bitmap.Config.ARGB_8888);
-//                        Matrix mx = new Matrix();
-//                        mx.postScale(-1, 1);
-//                        soundbitmap = Bitmap.createBitmap(soundbitmap, 0, 0, soundbitmap.getWidth(), soundbitmap.getHeight(), mx, false);
-//                        soundbitmap = Bitmap.createScaledBitmap(soundbitmap,imageWidth,imageWidth,false);
                     }
-                    AudioCapture.close();
                 }
             }
         }.start();
+//        new Thread() {
+//            public void run() {
+//                while(true) {
+//                    double[] expectedData = new double[2];
+//                    while(true) {
+//                        iq2;f (AudioCapture.read(expectedData, 1) > 0) {
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//        }.start();
 
     }
 

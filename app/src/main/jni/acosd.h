@@ -2,7 +2,7 @@
  * File: acosd.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Mar-2022 12:17:08
+ * C/C++ source code generated on  : 24-Mar-2022 14:32:31
  */
 
 #ifndef ACOSD_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_acosd(creal_T x[604920]);
+void b_acosd(creal_T x[155520]);
 
 #ifdef __cplusplus
 }

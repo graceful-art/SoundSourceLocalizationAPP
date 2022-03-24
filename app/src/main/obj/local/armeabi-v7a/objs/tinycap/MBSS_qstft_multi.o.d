@@ -7,8 +7,8 @@
   E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\float.h \
   E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stddef.h \
   E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stdlib.h \
-  jni\MBSS_stft_multi.h jni\main5_emxutil.h jni\main5_types.h \
-  jni\mtimes.h jni\nchoosek.h jni\rt_nonfinite.h \
+  jni\FFTImplementationCallback.h jni\rt_nonfinite.h \
+  E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\math.h \
   E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\string.h
 
 jni\MBSS_qstft_multi.h:
@@ -29,16 +29,10 @@ E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\
 
 E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stdlib.h:
 
-jni\MBSS_stft_multi.h:
-
-jni\main5_emxutil.h:
-
-jni\main5_types.h:
-
-jni\mtimes.h:
-
-jni\nchoosek.h:
+jni\FFTImplementationCallback.h:
 
 jni\rt_nonfinite.h:
+
+E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\math.h:
 
 E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\string.h:

@@ -2,7 +2,7 @@
  * File: MBSS_computeAngularSpectrum.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Mar-2022 12:17:08
+ * C/C++ source code generated on  : 24-Mar-2022 14:32:31
  */
 
 /* Include Files */
@@ -48,21 +48,18 @@
  *  freqBins         : 1 x K containing the index of frequency bins used for the
  * aggregation
  *
- * Arguments    : const double alpha[604920]
+ * Arguments    : const double alpha[155520]
  *                const cell_wrap_0 alphaSampled[120]
  *                const cell_wrap_0 tauGrid[120]
- *                const creal_T X[1572864]
- *                double specInst[15123]
+ *                const creal_T X[16384]
+ *                double specInst[2592]
  * Return Type  : void
  */
-void MBSS_computeAngularSpectrum(const double alpha[604920],
+void MBSS_computeAngularSpectrum(const double alpha[155520],
                                  const cell_wrap_0 alphaSampled[120],
                                  const cell_wrap_0 tauGrid[120],
-                                 const creal_T X[1572864],
-                                 double specInst[15123])
+                                 const creal_T X[16384], double specInst[2592])
 {
-  static creal_T hatRxx[14328];
-  static double specCurrentPair[15123];
   static const signed char pairId[240] = {
       1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  2,  2,  2,
       2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  3,  3,  3,  3,  3,  3,  3,
@@ -83,12 +80,13 @@ void MBSS_computeAngularSpectrum(const double alpha[604920],
   emxArray_real_T *specSampledgrid;
   emxArray_real_T *x;
   emxArray_real_T *y;
-  creal_T EXP[3582];
-  creal_T b_y[1194];
-  double TR[3582];
+  creal_T hatRxx[144];
+  creal_T EXP[36];
+  creal_T b_y[18];
+  double specCurrentPair[2592];
+  double TR[36];
   double im;
   double r;
-  double re;
   double y_im;
   double y_re;
   int b_i;
@@ -145,7 +143,7 @@ void MBSS_computeAngularSpectrum(const double alpha[604920],
    */
   /*  Computing the angular spectrum */
   /*  nbin x nFrames x 2 x 2 */
-  memset(&specInst[0], 0, 15123U * sizeof(double));
+  memset(&specInst[0], 0, 2592U * sizeof(double));
   emxInit_real_T(&specSampledgrid, 2);
   emxInit_real_T(&SNR, 3);
   emxInit_real_T(&y, 3);
@@ -156,12 +154,12 @@ void MBSS_computeAngularSpectrum(const double alpha[604920],
     hatRxx_tmp[1] = pairId[i + 120];
     for (b_i = 0; b_i < 2; b_i++) {
       for (i1 = 0; i1 < 2; i1++) {
-        for (low_ip1 = 0; low_ip1 < 3; low_ip1++) {
-          for (mid_i = 0; mid_i < 1194; mid_i++) {
-            hatRxx[((mid_i + 1194 * low_ip1) + 3582 * i1) + 7164 * b_i] =
-                X[(((mid_i + (low_ip1 << 11)) + 6144 * (hatRxx_tmp[i1] - 1)) +
-                   98304 * (hatRxx_tmp[b_i] - 1)) +
-                  853];
+        for (low_ip1 = 0; low_ip1 < 2; low_ip1++) {
+          for (mid_i = 0; mid_i < 18; mid_i++) {
+            hatRxx[((mid_i + 18 * low_ip1) + 36 * i1) + 72 * b_i] =
+                X[(((mid_i + (low_ip1 << 5)) + ((hatRxx_tmp[i1] - 1) << 6)) +
+                   ((hatRxx_tmp[b_i] - 1) << 10)) +
+                  13];
           }
         }
       }
@@ -197,50 +195,49 @@ void MBSS_computeAngularSpectrum(const double alpha[604920],
     /*  Signal Processing 92, pp. 1950-1960, 2012. */
     /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
      */
-    for (b_i = 0; b_i < 3; b_i++) {
-      for (i1 = 0; i1 < 1194; i1++) {
-        ibtile = i1 + 1194 * b_i;
-        TR[ibtile] = hatRxx[ibtile].re + hatRxx[ibtile + 10746].re;
+    for (b_i = 0; b_i < 2; b_i++) {
+      for (i1 = 0; i1 < 18; i1++) {
+        ibtile = i1 + 18 * b_i;
+        TR[ibtile] = hatRxx[ibtile].re + hatRxx[ibtile + 108].re;
       }
     }
     b_i = SNR->size[0] * SNR->size[1] * SNR->size[2];
-    SNR->size[0] = 1194;
-    SNR->size[1] = 3;
+    SNR->size[0] = 18;
+    SNR->size[1] = 2;
     i1 = tauGrid[i].f1->size[1];
     SNR->size[2] = tauGrid[i].f1->size[1];
     emxEnsureCapacity_real_T(SNR, b_i);
-    for (low_ip1 = 0; low_ip1 < i1; low_ip1++) {
-      y_re = tauGrid[i].f1->data[low_ip1] * -0.0;
-      y_im = tauGrid[i].f1->data[low_ip1] * -6.2831853071795862;
-      for (k = 0; k < 1194; k++) {
-        r = 23.4375 * (double)k + 20015.625;
-        re = r * y_re;
-        im = r * y_im;
-        b_y[k].re = re;
+    for (mid_i = 0; mid_i < i1; mid_i++) {
+      y_re = tauGrid[i].f1->data[mid_i] * -0.0;
+      y_im = tauGrid[i].f1->data[mid_i] * -6.2831853071795862;
+      for (k = 0; k < 18; k++) {
+        ibtile = 1500 * k + 21000;
+        r = (double)ibtile * y_re;
+        im = (double)ibtile * y_im;
+        b_y[k].re = r;
         b_y[k].im = im;
         if (im == 0.0) {
-          b_y[k].re = exp(re);
+          b_y[k].re = exp(r);
           b_y[k].im = 0.0;
         } else {
-          r = exp(re / 2.0);
+          r = exp(r / 2.0);
           b_y[k].re = r * (r * cos(im));
           b_y[k].im = r * (r * sin(im));
         }
       }
-      for (mid_i = 0; mid_i < 3; mid_i++) {
-        ibtile = mid_i * 1194;
-        for (k = 0; k < 1194; k++) {
+      for (low_ip1 = 0; low_ip1 < 2; low_ip1++) {
+        ibtile = low_ip1 * 18;
+        for (k = 0; k < 18; k++) {
           EXP[ibtile + k] = b_y[k];
-          npages = k + 1194 * mid_i;
-          re = hatRxx[npages + 7164].re;
-          im = hatRxx[npages + 7164].im;
-          y_re = TR[npages];
-          r = ((hatRxx[npages].re * hatRxx[npages + 10746].re -
-                hatRxx[npages].im * hatRxx[npages + 10746].im) -
-               (re * hatRxx[npages + 3582].re -
-                im * hatRxx[npages + 3582].im)) /
-              (y_re - 2.0 * (re * EXP[npages].re - im * EXP[npages].im));
-          SNR->data[npages + 3582 * low_ip1] = r / (0.5 * y_re - r);
+          npages = k + 18 * low_ip1;
+          r = hatRxx[npages + 72].re;
+          im = hatRxx[npages + 72].im;
+          y_im = TR[npages];
+          y_re = ((hatRxx[npages].re * hatRxx[npages + 108].re -
+                   hatRxx[npages].im * hatRxx[npages + 108].im) -
+                  (r * hatRxx[npages + 36].re - im * hatRxx[npages + 36].im)) /
+                 (y_im - 2.0 * (r * EXP[npages].re - im * EXP[npages].im));
+          SNR->data[npages + 36 * mid_i] = y_re / (0.5 * y_im - y_re);
         }
       }
     }
@@ -248,7 +245,7 @@ void MBSS_computeAngularSpectrum(const double alpha[604920],
     /*  sum on frequencies */
     if (SNR->size[2] == 0) {
       y->size[0] = 1;
-      y->size[1] = 3;
+      y->size[1] = 2;
       y->size[2] = 0;
     } else {
       npages = 1;
@@ -261,48 +258,41 @@ void MBSS_computeAngularSpectrum(const double alpha[604920],
       }
       b_i = y->size[0] * y->size[1] * y->size[2];
       y->size[0] = 1;
-      y->size[1] = 3;
+      y->size[1] = 2;
       y->size[2] = SNR->size[2];
       emxEnsureCapacity_real_T(y, b_i);
       for (low_ip1 = 0; low_ip1 < npages; low_ip1++) {
-        ibtile = low_ip1 * 1194;
+        ibtile = low_ip1 * 18;
         y->data[low_ip1] = SNR->data[ibtile];
-        for (k = 0; k < 1023; k++) {
+        for (k = 0; k < 17; k++) {
           y->data[low_ip1] += SNR->data[(ibtile + k) + 1];
         }
-        r = SNR->data[ibtile + 1024];
-        for (k = 0; k < 169; k++) {
-          r += SNR->data[(ibtile + k) + 1025];
-        }
-        y->data[low_ip1] += r;
       }
     }
     if (y->size[2] == 0) {
-      b->size[0] = 3;
+      b->size[0] = 2;
       b->size[1] = 0;
     } else {
       b_i = b->size[0] * b->size[1];
-      b->size[0] = 3;
+      b->size[0] = 2;
       b->size[1] = y->size[2];
       emxEnsureCapacity_real_T(b, b_i);
       b_i = y->size[2];
       for (k = 0; k < b_i; k++) {
-        b->data[3 * k] = y->data[3 * k];
-        i1 = 3 * k + 1;
-        b->data[i1] = y->data[i1];
-        i1 = 3 * k + 2;
+        b->data[2 * k] = y->data[2 * k];
+        i1 = 2 * k + 1;
         b->data[i1] = y->data[i1];
       }
     }
     b_i = specSampledgrid->size[0] * specSampledgrid->size[1];
     specSampledgrid->size[0] = b->size[1];
-    specSampledgrid->size[1] = 3;
+    specSampledgrid->size[1] = 2;
     emxEnsureCapacity_real_T(specSampledgrid, b_i);
     ibtile = b->size[1];
-    for (b_i = 0; b_i < 3; b_i++) {
+    for (b_i = 0; b_i < 2; b_i++) {
       for (i1 = 0; i1 < ibtile; i1++) {
         specSampledgrid->data[i1 + specSampledgrid->size[0] * b_i] =
-            b->data[b_i + 3 * i1];
+            b->data[b_i + 2 * i1];
       }
     }
     /*  Order 1 interpolation on the entire grid */
@@ -313,12 +303,12 @@ void MBSS_computeAngularSpectrum(const double alpha[604920],
     for (b_i = 0; b_i < ibtile; b_i++) {
       x->data[b_i] = alphaSampled[i].f1->data[b_i];
     }
-    for (b_i = 0; b_i < 15123; b_i++) {
+    for (b_i = 0; b_i < 2592; b_i++) {
       specCurrentPair[b_i] = rtNaN;
     }
-    for (k = 0; k < 5041; k++) {
-      y_re = alpha[i + 120 * k];
-      if ((y_re >= x->data[0]) && (y_re <= x->data[x->size[0] - 1])) {
+    for (k = 0; k < 1296; k++) {
+      y_im = alpha[i + 120 * k];
+      if ((y_im >= x->data[0]) && (y_im <= x->data[x->size[0] - 1])) {
         ibtile = x->size[0];
         npages = 1;
         low_ip1 = 2;
@@ -327,45 +317,34 @@ void MBSS_computeAngularSpectrum(const double alpha[604920],
           if (((npages & 1) == 1) && ((ibtile & 1) == 1)) {
             mid_i++;
           }
-          if (y_re >= x->data[mid_i - 1]) {
+          if (y_im >= x->data[mid_i - 1]) {
             npages = mid_i;
             low_ip1 = mid_i + 1;
           } else {
             ibtile = mid_i;
           }
         }
-        r = x->data[npages - 1];
-        r = (y_re - r) / (x->data[npages] - r);
-        y_re = specSampledgrid->data[npages - 1];
-        if (y_re == specSampledgrid->data[npages]) {
+        y_re = x->data[npages - 1];
+        r = (y_im - y_re) / (x->data[npages] - y_re);
+        y_im = specSampledgrid->data[npages - 1];
+        if (y_im == specSampledgrid->data[npages]) {
           specCurrentPair[k] = specSampledgrid->data[npages - 1];
         } else {
           specCurrentPair[k] =
-              (1.0 - r) * y_re + r * specSampledgrid->data[npages];
+              (1.0 - r) * y_im + r * specSampledgrid->data[npages];
         }
-        y_re = specSampledgrid->data[(npages + specSampledgrid->size[0]) - 1];
-        if (y_re == specSampledgrid->data[npages + specSampledgrid->size[0]]) {
-          specCurrentPair[k + 5041] =
-              specSampledgrid->data[(npages + specSampledgrid->size[0]) - 1];
+        y_im = specSampledgrid->data[(npages + specSampledgrid->size[0]) - 1];
+        if (y_im == specSampledgrid->data[npages + specSampledgrid->size[0]]) {
+          specCurrentPair[k + 1296] = y_im;
         } else {
-          specCurrentPair[k + 5041] =
-              (1.0 - r) * y_re +
+          specCurrentPair[k + 1296] =
+              (1.0 - r) * y_im +
               r * specSampledgrid->data[npages + specSampledgrid->size[0]];
-        }
-        y_re =
-            specSampledgrid->data[(npages + specSampledgrid->size[0] * 2) - 1];
-        if (y_re ==
-            specSampledgrid->data[npages + specSampledgrid->size[0] * 2]) {
-          specCurrentPair[k + 10082] = y_re;
-        } else {
-          specCurrentPair[k + 10082] =
-              (1.0 - r) * y_re +
-              r * specSampledgrid->data[npages + specSampledgrid->size[0] * 2];
         }
       }
     }
     /* Aggregation */
-    for (b_i = 0; b_i < 15123; b_i++) {
+    for (b_i = 0; b_i < 2592; b_i++) {
       specInst[b_i] += specCurrentPair[b_i];
     }
   }

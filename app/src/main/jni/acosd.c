@@ -2,7 +2,7 @@
  * File: acosd.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Mar-2022 12:17:08
+ * C/C++ source code generated on  : 24-Mar-2022 14:32:31
  */
 
 /* Include Files */
@@ -56,10 +56,10 @@ static double rt_atan2d_snf(double u0, double u1)
 }
 
 /*
- * Arguments    : creal_T x[604920]
+ * Arguments    : creal_T x[155520]
  * Return Type  : void
  */
-void b_acosd(creal_T x[604920])
+void b_acosd(creal_T x[155520])
 {
   creal_T u;
   creal_T v;
@@ -76,7 +76,7 @@ void b_acosd(creal_T x[604920])
   double t4;
   int k;
   boolean_T xneg;
-  for (k = 0; k < 604920; k++) {
+  for (k = 0; k < 155520; k++) {
     if ((x[k].im == 0.0) && (!(fabs(x[k].re) > 1.0))) {
       v.re = acos(x[k].re);
       v.im = 0.0;

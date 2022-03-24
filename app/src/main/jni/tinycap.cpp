@@ -227,7 +227,8 @@ unsigned int capture_sample(FILE *file, unsigned int card, unsigned int device,
     return pcm_bytes_to_frames(pcm, bytes_read);
 }
 
-struct pcm *pcm;
+struct pcm *pcm1;
+struct pcm *pcm2;
 char *buffer;
 unsigned int size;
 static int open(void)
@@ -267,18 +268,24 @@ static int open(void)
     config.silence_threshold = 0;
 
     signal(SIGINT, sigint_handler);
-    pcm = pcm_open(card, device, PCM_IN, &config);
-    if (!pcm || !pcm_is_ready(pcm)) {
-        LOGD("Unable to open PCM device (%s)\n", pcm_get_error(pcm));
+    pcm1 = pcm_open(3, device, PCM_IN, &config);
+    if (!pcm1 || !pcm_is_ready(pcm1)) {
+        LOGD("Unable to open PCM device (%s)\n", pcm_get_error(pcm1));
+        return 1;
+    }
+    pcm2 = pcm_open(4, device, PCM_IN, &config);
+    if (!pcm2 || !pcm_is_ready(pcm2)) {
+        LOGD("Unable to open PCM device (%s)\n", pcm_get_error(pcm2));
         return 1;
     }
 
-    size = pcm_frames_to_bytes(pcm, pcm_get_buffer_size(pcm));
-    buffer = (char *)malloc(size);
+    size = pcm_frames_to_bytes(pcm1, pcm_get_buffer_size(pcm1));
+    buffer = (char *)malloc(size*2);
     if (!buffer) {
         LOGD("Unable to allocate %d bytes\n", size);
         free(buffer);
-        pcm_close(pcm);
+        pcm_close(pcm1);
+        pcm_close(pcm2);
         return 1;
     }
 
@@ -287,10 +294,10 @@ static int open(void)
 
 static int read(void)
 {
-    if(pcm_read(pcm, buffer, size)) {
+//    if(pcm_read(pcm, buffer, size)) {
         LOGD("Error capturing sample\n");
         return 1;
-    }
+//    }
     FILE *file1;
     char buf[15];
     int * buffer1 = (int*)buffer;
@@ -309,7 +316,8 @@ static int read(void)
 static void close(void)
 {
     free(buffer);
-    pcm_close(pcm);
+    pcm_close(pcm1);
+    pcm_close(pcm2);
 }
 
 extern "C"
@@ -320,11 +328,29 @@ extern "C"
     JNIEXPORT jint JNICALL Java_com_company_ssl_AudioCapture_open(JNIEnv *env, jobject obj) {
         return open();
     }
-    JNIEXPORT jint JNICALL Java_com_company_ssl_AudioCapture_read(JNIEnv *env, jobject obj, jdoubleArray expectedData) {
-        if(pcm_read(pcm, buffer, size)) {
-            LOGD("Error capturing sample\n");
-            return 1;
+    JNIEXPORT jint JNICALL Java_com_company_ssl_AudioCapture_read(JNIEnv *env, jobject obj, jdoubleArray expectedData, jint number) {
+        switch(number)
+        {
+        case 0:
+            if(pcm_read(pcm1, buffer, size)) {
+                LOGD("Error capturing sample\n");
+                return 1;
+            }
+            break;
+        case 1:
+            if(pcm_read(pcm2, buffer+size, size)) {
+                LOGD("Error capturing sample\n");
+                return 1;
+            }
+            break;
         }
+        short* buffer1 = (short*)(buffer+size*number);
+        short max;
+        for(int i=0;i<size/2;++i){
+            if(buffer1[i]>max) max=buffer1[i];
+        }
+        if(max>3276)
+        {
 //        FILE *file1;
 //        char buf[40];
 //        static int count=0;
@@ -337,18 +363,11 @@ extern "C"
 //        }
 //        fclose(file1);
 //        count++;
-        LOGD("Capture succeed! %d\n",size);
+        LOGD("Number %d Capture succeed! %d\n",number,size);
         double* res;
-    clock_t start, finish;
-    double duration;
-    /* 测量一个事件持续的时间*/
-    start = clock();
-        res = main4(buffer,size);
-    finish = clock();
-
-    duration = (double)(finish - start) / CLOCKS_PER_SEC;
-    LOGD("Time:%f ",duration);
+        res = main4(buffer+size*number,size);
         env->SetDoubleArrayRegion(expectedData, 0, 2, res);
+        }
         return 0;
     }
     JNIEXPORT void JNICALL Java_com_company_ssl_AudioCapture_close(JNIEnv *env, jobject obj) {

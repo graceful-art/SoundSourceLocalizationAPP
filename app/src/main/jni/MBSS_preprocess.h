@@ -2,7 +2,7 @@
  * File: MBSS_preprocess.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Mar-2022 12:17:08
+ * C/C++ source code generated on  : 24-Mar-2022 14:32:31
  */
 
 #ifndef MBSS_PREPROCESS_H
@@ -19,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void MBSS_preprocess(double alpha[604920], cell_wrap_0 alphaSampled[120],
+void MBSS_preprocess(double alpha[155520], cell_wrap_0 alphaSampled[120],
                      cell_wrap_0 tauGrid[120]);
 
 #ifdef __cplusplus

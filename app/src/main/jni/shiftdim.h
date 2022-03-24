@@ -2,7 +2,7 @@
  * File: shiftdim.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Mar-2022 12:17:08
+ * C/C++ source code generated on  : 24-Mar-2022 14:32:31
  */
 
 #ifndef SHIFTDIM_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void shiftdim(const double x[604920], double b[604920]);
+void shiftdim(const double x[155520], double b[155520]);
 
 #ifdef __cplusplus
 }
