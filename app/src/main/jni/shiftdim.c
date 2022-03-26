@@ -2,7 +2,7 @@
  * File: shiftdim.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2022 14:32:31
+ * C/C++ source code generated on  : 26-Mar-2022 15:53:05
  */
 
 /* Include Files */
@@ -12,14 +12,14 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const double x[155520]
- *                double b[155520]
+ * Arguments    : const double x[604920]
+ *                double b[604920]
  * Return Type  : void
  */
-void shiftdim(const double x[155520], double b[155520])
+void shiftdim(const double x[604920], double b[604920])
 {
   int k;
-  for (k = 0; k < 1296; k++) {
+  for (k = 0; k < 5041; k++) {
     memcpy(&b[k * 120], &x[k * 120], 120U * sizeof(double));
   }
 }

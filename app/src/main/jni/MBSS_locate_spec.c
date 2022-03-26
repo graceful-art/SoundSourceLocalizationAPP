@@ -2,7 +2,7 @@
  * File: MBSS_locate_spec.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2022 14:32:31
+ * C/C++ source code generated on  : 26-Mar-2022 15:53:05
  */
 
 /* Include Files */
@@ -14,23 +14,23 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const double ppfSpec[1296]
- *                const double piAzimutGrid[1296]
- *                const double piElevationGrid[1296]
+ * Arguments    : const double ppfSpec[5041]
+ *                const double piAzimutGrid[5041]
+ *                const double piElevationGrid[5041]
  *                double pfEstAngles[2]
  * Return Type  : void
  */
-void MBSS_findPeaks2D(const double ppfSpec[1296],
-                      const double piAzimutGrid[1296],
-                      const double piElevationGrid[1296], double pfEstAngles[2])
+void MBSS_findPeaks2D(const double ppfSpec[5041],
+                      const double piAzimutGrid[5041],
+                      const double piElevationGrid[5041], double pfEstAngles[2])
 {
-  double ppfPadpeakFilter[1444];
-  double b_ppfSpec2D[1296];
-  double ppfSpec2D[1296];
-  double minval[36];
+  static double ppfPadpeakFilter[5329];
+  double b_ppfSpec2D[5041];
+  double ppfSpec2D[5041];
+  double minval[71];
   double d;
   double ex;
-  int iidx[1296];
+  int iidx[5041];
   int b_i;
   int b_ppfSpec2D_tmp;
   int i;
@@ -40,14 +40,14 @@ void MBSS_findPeaks2D(const double ppfSpec[1296],
   boolean_T p;
   /*  PEAKS FINDING METHODS */
   /*  Convert angular spectrum in 2D */
-  for (i = 0; i < 36; i++) {
-    for (b_i = 0; b_i < 36; b_i++) {
-      ppfSpec2D[b_i + 36 * i] = ppfSpec[i + 36 * b_i];
+  for (i = 0; i < 71; i++) {
+    for (b_i = 0; b_i < 71; b_i++) {
+      ppfSpec2D[b_i + 71 * i] = ppfSpec[i + 71 * b_i];
     }
   }
   /*  All values of flat peaks are detected as peaks with this implementation :
    */
-  for (i = 0; i < 1444; i++) {
+  for (i = 0; i < 5329; i++) {
     ppfPadpeakFilter[i] = rtMinusInf;
   }
   /*  Find peaks : compare values with their neighbours */
@@ -61,12 +61,12 @@ void MBSS_findPeaks2D(const double ppfSpec[1296],
   /*  bottom/right */
   /*  number of local maxima */
   /*  local maxima with corrresponding values */
-  for (idx = 0; idx < 36; idx++) {
-    memcpy(&ppfPadpeakFilter[idx * 38 + 39], &ppfSpec2D[idx * 36],
-           36U * sizeof(double));
-    minval[idx] = ppfSpec2D[36 * idx];
-    for (b_i = 0; b_i < 35; b_i++) {
-      d = ppfSpec2D[(b_i + 36 * idx) + 1];
+  for (idx = 0; idx < 71; idx++) {
+    memcpy(&ppfPadpeakFilter[idx * 73 + 74], &ppfSpec2D[idx * 71],
+           71U * sizeof(double));
+    minval[idx] = ppfSpec2D[71 * idx];
+    for (b_i = 0; b_i < 70; b_i++) {
+      d = ppfSpec2D[(b_i + 71 * idx) + 1];
       if (rtIsNaN(d)) {
         p = false;
       } else if (rtIsNaN(minval[idx])) {
@@ -85,7 +85,7 @@ void MBSS_findPeaks2D(const double ppfSpec[1296],
     idx = 0;
     b_i = 2;
     exitg1 = false;
-    while ((!exitg1) && (b_i <= 36)) {
+    while ((!exitg1) && (b_i <= 71)) {
       if (!rtIsNaN(minval[b_i - 1])) {
         idx = b_i;
         exitg1 = true;
@@ -99,7 +99,7 @@ void MBSS_findPeaks2D(const double ppfSpec[1296],
   } else {
     ex = minval[idx - 1];
     i = idx + 1;
-    for (b_i = i; b_i < 37; b_i++) {
+    for (b_i = i; b_i < 72; b_i++) {
       d = minval[b_i - 1];
       if (ex > d) {
         ex = d;
@@ -109,14 +109,14 @@ void MBSS_findPeaks2D(const double ppfSpec[1296],
   /*  substract min value : avoid issues (when sorting peaks) if some peaks
    * values are negatives */
   /*  sort values of local maxima */
-  for (i = 0; i < 36; i++) {
-    for (b_i = 0; b_i < 36; b_i++) {
-      idx = i + 38 * (b_i + 1);
+  for (i = 0; i < 71; i++) {
+    for (b_i = 0; b_i < 71; b_i++) {
+      idx = i + 73 * (b_i + 1);
       d = ppfPadpeakFilter[idx + 1];
-      ppfSpec2D_tmp = i + 38 * b_i;
-      b_ppfSpec2D_tmp = i + 38 * (b_i + 2);
-      b_ppfSpec2D[b_i + 36 * i] =
-          (ppfSpec2D[i + 36 * b_i] - ex) *
+      ppfSpec2D_tmp = i + 73 * b_i;
+      b_ppfSpec2D_tmp = i + 73 * (b_i + 2);
+      b_ppfSpec2D[b_i + 71 * i] =
+          (ppfSpec2D[i + 71 * b_i] - ex) *
           (double)((d >= ppfPadpeakFilter[idx]) &&
                    (d >= ppfPadpeakFilter[idx + 2]) &&
                    (d >= ppfPadpeakFilter[ppfSpec2D_tmp + 1]) &&
@@ -128,7 +128,7 @@ void MBSS_findPeaks2D(const double ppfSpec[1296],
     }
   }
   sort(b_ppfSpec2D, iidx);
-  for (i = 0; i < 1296; i++) {
+  for (i = 0; i < 5041; i++) {
     ppfSpec2D[i] = iidx[i];
   }
   /*  first source is the global maximum (first one in piSortedPeaksIndex1D) */

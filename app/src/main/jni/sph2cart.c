@@ -2,7 +2,7 @@
  * File: sph2cart.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2022 14:32:31
+ * C/C++ source code generated on  : 26-Mar-2022 15:53:05
  */
 
 /* Include Files */
@@ -12,20 +12,20 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const double az[1296]
- *                const double elev[1296]
- *                double x[1296]
- *                double y[1296]
- *                double z[1296]
+ * Arguments    : const double az[5041]
+ *                const double elev[5041]
+ *                double x[5041]
+ *                double y[5041]
+ *                double z[5041]
  * Return Type  : void
  */
-void sph2cart(const double az[1296], const double elev[1296], double x[1296],
-              double y[1296], double z[1296])
+void sph2cart(const double az[5041], const double elev[5041], double x[5041],
+              double y[5041], double z[5041])
 {
   double d;
   double d1;
   int k;
-  for (k = 0; k < 1296; k++) {
+  for (k = 0; k < 5041; k++) {
     d = elev[k];
     z[k] = sin(d);
     d = cos(d);

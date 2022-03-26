@@ -2,7 +2,7 @@
  * File: sortIdx.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2022 14:32:31
+ * C/C++ source code generated on  : 26-Mar-2022 15:53:05
  */
 
 /* Include Files */
@@ -10,22 +10,22 @@
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
-static void merge(int idx[1296], double x[1296], int offset, int np, int nq,
-                  int iwork[1296], double xwork[1296]);
+static void merge(int idx[5041], double x[5041], int offset, int np, int nq,
+                  int iwork[5041], double xwork[5041]);
 
 /* Function Definitions */
 /*
- * Arguments    : int idx[1296]
- *                double x[1296]
+ * Arguments    : int idx[5041]
+ *                double x[5041]
  *                int offset
  *                int np
  *                int nq
- *                int iwork[1296]
- *                double xwork[1296]
+ *                int iwork[5041]
+ *                double xwork[5041]
  * Return Type  : void
  */
-static void merge(int idx[1296], double x[1296], int offset, int np, int nq,
-                  int iwork[1296], double xwork[1296])
+static void merge(int idx[5041], double x[5041], int offset, int np, int nq,
+                  int iwork[5041], double xwork[5041])
 {
   int exitg1;
   int iout;
@@ -74,17 +74,17 @@ static void merge(int idx[1296], double x[1296], int offset, int np, int nq,
 }
 
 /*
- * Arguments    : int idx[1296]
- *                double x[1296]
+ * Arguments    : int idx[5041]
+ *                double x[5041]
  *                int offset
  *                int n
  *                int preSortLevel
- *                int iwork[1296]
- *                double xwork[1296]
+ *                int iwork[5041]
+ *                double xwork[5041]
  * Return Type  : void
  */
-void merge_block(int idx[1296], double x[1296], int offset, int n,
-                 int preSortLevel, int iwork[1296], double xwork[1296])
+void merge_block(int idx[5041], double x[5041], int offset, int n,
+                 int preSortLevel, int iwork[5041], double xwork[5041])
 {
   int bLen;
   int nPairs;

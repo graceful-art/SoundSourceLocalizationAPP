@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern double* main4(char *buffer,int size);
+extern double* main4(char *buffer,int size,int number);
 
 #ifdef __cplusplus
 }

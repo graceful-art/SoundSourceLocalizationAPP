@@ -33,11 +33,11 @@
  * Arguments    : void
  * Return Type  : void
  */
-double* main4(char *buffer,int size)
+double* main4(char *buffer,int size,int number)
 {
-    static creal_T X[1573632];
-    static creal_T b_X[1572864];
-    static creal_T dcv[1572864];
+    static creal_T X[131584];
+    static creal_T b_X[131072];
+    static creal_T dcv[131072];
     static const double dv[5041] = { -125.0, -124.0, -123.0, -122.0, -121.0,
         -120.0, -119.0, -118.0, -117.0, -116.0, -115.0, -114.0, -113.0, -112.0,
         -111.0, -110.0, -109.0, -108.0, -107.0, -106.0, -105.0, -104.0, -103.0,
@@ -945,17 +945,44 @@ double* main4(char *buffer,int size)
         35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0,
         35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0 };
 
+       double micPos1[48] = {-0.002890,-0.008303,-0.012453,-0.014705,-0.014719,-0.012492,-0.008362,-0.002963,
+                0.002890,0.008303,0.012453,0.014705,0.014719,0.012492,0.008362,0.002963,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0.014719,0.012492,0.008362,0.002963,-0.002890,-0.008303,-0.012453,-0.014705,
+                -0.014719,-0.012492,-0.008362,-0.002963,0.002890,0.008303,0.012453,0.014705};
+
+       double micPos2[48] = {-0.006223,-0.013023,-0.017842,-0.019942,-0.019007,-0.015179,-0.009307,-0.001542,
+                0.006223,0.013023,0.017842,0.019942,0.019007,0.015179,0.009307,0.001542,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0.019007,0.015179,0.009307,0.001542,-0.006223,-0.013023,-0.017842,
+                -0.019942,-0.019007,-0.015179,-0.009307,-0.001542,0.006223,0.013023,0.017842,0.019942};
+
+       double micPos5[48] = {-0.021674,-0.030541,-0.03476,-0.033684,-0.027482,-0.017095,-0.004104,0.009507,
+                0.021674,0.030541,0.03476,0.033684,0.027482,0.017095,0.004104,-0.009507,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0.027482,0.017095,0.004104,-0.009507,-0.021674,0.030541,-0.03476,-0.033684,
+                -0.027482,-0.017095,-0.004104,0.009507,0.021674,0.030541,0.03476,0.033684};
+
+
+
+       double micPos6[48] = {-0.028622,-0.037136,-0.039999,-0.036769,-0.027943,-0.014863,0.0004830,
+                0.01575,0.028622,0.037136,0.039999,0.036769,0.027943,0.014863,-0.0004830,-0.01575,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0.027943,0.014863,-0.0004830,-0.01575,-0.028622,-0.037136,-0.039999,-0.036769,
+                -0.027943,-0.014863,0.0004830,0.01575,0.028622,0.037136,0.039999,0.036769};
+
+    static double unusedExpr[2];
     static double alpha[604920];
-    static double s1cac[131072];
-    static double specInst[15123];
+    static double specInst[10082];
     static double specGlobal[5041];
     cell_wrap_0 alphaSampled[120];
     cell_wrap_0 tauGrid[120];
-    static double unusedExpr[2];
-    double d;
+    double d[120];
+    double b_d;
+    double d1;
     int b_i;
     int i;
-    int j;
+    int i1;
     boolean_T p;
     if (!isInitialized_main5) {
         main5_initialize();
@@ -1038,10 +1065,6 @@ double* main4(char *buffer,int size)
         dv1[i1 + 15] = *(res + i*16 + 15);
     }*/
 
-
-    emxInitMatrix_cell_wrap_0(alphaSampled);
-    emxInitMatrix_cell_wrap_0(tauGrid);
-
     /*  all the mics */
     /*  Fill the structure */
     /*  Compute the microphone array centroid */
@@ -1054,40 +1077,60 @@ double* main4(char *buffer,int size)
     /*  estimated elevation in degrees */
     /*  elapsed time in seconds */
     /*  Create the aggregationParam structure */
-    MBSS_preprocess(alpha, alphaSampled, tauGrid);
+    emxInitMatrix_cell_wrap_0(alphaSampled);
+    emxInitMatrix_cell_wrap_0(tauGrid);
+    switch(number)
+    {
+    case 1:
+        MBSS_preprocess(micPos1, d, alpha, alphaSampled, tauGrid);
+        break;
+    case 2:
+        MBSS_preprocess(micPos2, d, alpha, alphaSampled, tauGrid);
+        break;
+    case 5:
+        MBSS_preprocess(micPos5, d, alpha, alphaSampled, tauGrid);
+        break;
+    case 6:
+        MBSS_preprocess(micPos6, d, alpha, alphaSampled, tauGrid);
+        break;
+    default:
+        LOGD("MicPos Error");
+        return;
+        break;
+    }
     /*  Apply wiener filtering on X if requested */
     /*  Compute the angular spectrum */
-    for (j = 0; j < 3; j++) {
-        for (i = 0; i < 2048; i++) {
-          for (b_i = 0; b_i < 16; b_i++) {
-            memcpy(&b_X[(j * 524288 + i * 256) + b_i * 16], &X[((j * 524544 + i *
-                     256) + b_i * 16) + 256], 16U * sizeof(creal_T));
-          }
+  for (i = 0; i < 2; i++) {
+      for (b_i = 0; b_i < 256; b_i++) {
+        for (i1 = 0; i1 < 16; i1++) {
+          memcpy(&b_X[(i * 65536 + b_i * 256) + i1 * 16],
+                 &X[((i * 65792 + b_i * 256) + i1 * 16) + 256],
+                 16U * sizeof(creal_T));
         }
       }
-    permute(b_X, dcv);
-
+    }
+  permute(b_X, dcv);
     MBSS_computeAngularSpectrum(alpha, alphaSampled, tauGrid, dcv, specInst);
     /*  Normalize instantaneous local angular spectra if requested */
     /*  Pooling */
     emxFreeMatrix_cell_wrap_0(tauGrid);
     emxFreeMatrix_cell_wrap_0(alphaSampled);
     memcpy(&specGlobal[0], &specInst[0], 5041U * sizeof(double));
-    for (j = 0; j < 2; j++) {
-      for (i = 0; i < 5041; i++) {
-        d = specInst[i + 5041 * (j + 1)];
-        if (rtIsNaN(d)) {
+    for (i = 0; i < 5041; i++) {
+        b_d = specInst[i];
+        specGlobal[i] = b_d;
+        d1 = specInst[i + 5041];
+        if (rtIsNaN(d1)) {
           p = false;
-        } else if (rtIsNaN(specGlobal[i])) {
+        } else if (rtIsNaN(b_d)) {
           p = true;
         } else {
-          p = (specGlobal[i] < d);
+          p = (b_d < d1);
         }
         if (p) {
-          specGlobal[i] = d;
+          specGlobal[i] = d1;
         }
       }
-    }
     MBSS_findPeaks2D(specGlobal, dv, dv1, unusedExpr);
     /*  Print the result */
     LOGD("%.2f ", unusedExpr[0]);

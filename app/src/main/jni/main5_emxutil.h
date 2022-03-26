@@ -2,7 +2,7 @@
  * File: main5_emxutil.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2022 14:32:31
+ * C/C++ source code generated on  : 26-Mar-2022 15:53:05
  */
 
 #ifndef MAIN5_EMXUTIL_H
@@ -19,17 +19,23 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+extern void emxEnsureCapacity_creal_T(emxArray_creal_T *emxArray, int oldNumel);
+
 extern void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel);
 
 extern void emxFreeMatrix_cell_wrap_0(cell_wrap_0 pMatrix[120]);
 
 extern void emxFreeStruct_cell_wrap_0(cell_wrap_0 *pStruct);
 
+extern void emxFree_creal_T(emxArray_creal_T **pEmxArray);
+
 extern void emxFree_real_T(emxArray_real_T **pEmxArray);
 
 extern void emxInitMatrix_cell_wrap_0(cell_wrap_0 pMatrix[120]);
 
 extern void emxInitStruct_cell_wrap_0(cell_wrap_0 *pStruct);
+
+extern void emxInit_creal_T(emxArray_creal_T **pEmxArray, int numDimensions);
 
 extern void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 

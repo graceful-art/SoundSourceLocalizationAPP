@@ -2,7 +2,7 @@
  * File: minOrMax.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2022 14:32:31
+ * C/C++ source code generated on  : 26-Mar-2022 15:53:05
  */
 
 #ifndef MINORMAX_H
@@ -18,9 +18,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double maximum(const double x[1296]);
+double maximum(const double x[5041]);
 
-double minimum(const double x[1296]);
+double minimum(const double x[5041]);
 
 #ifdef __cplusplus
 }

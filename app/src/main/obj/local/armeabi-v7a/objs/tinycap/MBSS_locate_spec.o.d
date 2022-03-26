@@ -1,35 +1,17 @@
-./obj/local/armeabi-v7a/objs/tinycap/MBSS_locate_spec.o: \
-  jni\MBSS_locate_spec.c jni\MBSS_locate_spec.h jni\rtwtypes.h \
-  jni\tmwtypes.h \
-  E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\limits.h \
-  E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\__config \
-  E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stdbool.h \
-  E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\float.h \
-  E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stddef.h \
-  E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stdlib.h \
-  jni\rt_nonfinite.h jni\sort.h \
-  E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\string.h
+obj/local/armeabi-v7a/objs/tinycap/MBSS_locate_spec.o: \
+ jni/MBSS_locate_spec.c jni/MBSS_locate_spec.h jni/rtwtypes.h \
+ jni/tmwtypes.h \
+ D:/Android_SDK/android-ndk-r12b-windows-x86_64/android-ndk-r12b/build//../sources/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h \
+ jni/rt_nonfinite.h jni/sort.h
 
-jni\MBSS_locate_spec.h:
+jni/MBSS_locate_spec.h:
 
-jni\rtwtypes.h:
+jni/rtwtypes.h:
 
-jni\tmwtypes.h:
+jni/tmwtypes.h:
 
-E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\limits.h:
+D:/Android_SDK/android-ndk-r12b-windows-x86_64/android-ndk-r12b/build//../sources/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h:
 
-E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\__config:
+jni/rt_nonfinite.h:
 
-E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stdbool.h:
-
-E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\float.h:
-
-E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stddef.h:
-
-E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\stdlib.h:
-
-jni\rt_nonfinite.h:
-
-jni\sort.h:
-
-E:\Android_SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk-bundle\build\\..\sources\cxx-stl\llvm-libc++\include\string.h:
+jni/sort.h:

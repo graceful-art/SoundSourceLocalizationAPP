@@ -238,7 +238,7 @@ static int open(void)
     unsigned int channels = 16;
     unsigned int rate = 96000;
     unsigned int bits = 16;
-    unsigned int period_size = 1024;
+    unsigned int period_size = 96;
     unsigned int period_count = 8;
     enum pcm_format format;
 
@@ -273,11 +273,11 @@ static int open(void)
         LOGD("Unable to open PCM device (%s)\n", pcm_get_error(pcm1));
         return 1;
     }
-    pcm2 = pcm_open(4, device, PCM_IN, &config);
-    if (!pcm2 || !pcm_is_ready(pcm2)) {
-        LOGD("Unable to open PCM device (%s)\n", pcm_get_error(pcm2));
-        return 1;
-    }
+//    pcm2 = pcm_open(4, device, PCM_IN, &config);
+//    if (!pcm2 || !pcm_is_ready(pcm2)) {
+//        LOGD("Unable to open PCM device (%s)\n", pcm_get_error(pcm2));
+//        return 1;
+//    }
 
     size = pcm_frames_to_bytes(pcm1, pcm_get_buffer_size(pcm1));
     buffer = (char *)malloc(size*2);
@@ -309,7 +309,7 @@ static int read(void)
     fclose(file1);
     LOGD("Capture succeed! %d\n",size);
     double * res;
-    res = main4(buffer,size);
+    res = main4(buffer,size,5);
     return 0;
 }
 
@@ -363,9 +363,9 @@ extern "C"
 //        }
 //        fclose(file1);
 //        count++;
-        LOGD("Number %d Capture succeed! %d\n",number,size);
+        LOGD("Number %d Capture succeed! Max %d\n",number,max);
         double* res;
-        res = main4(buffer+size*number,size);
+        res = main4(buffer+size*number,size,5);
         env->SetDoubleArrayRegion(expectedData, 0, 2, res);
         }
         return 0;

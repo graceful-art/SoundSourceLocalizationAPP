@@ -2,7 +2,7 @@
  * File: repmat.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2022 14:32:31
+ * C/C++ source code generated on  : 26-Mar-2022 15:53:05
  */
 
 #ifndef REPMAT_H
@@ -18,11 +18,11 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_repmat(double b[466560]);
+void b_repmat(const double a[360], double b[1814760]);
 
-void c_repmat(double b[155520]);
+void c_repmat(const double a[120], double b[604920]);
 
-void repmat(const double a[3888], double b[466560]);
+void repmat(const double a[15123], double b[1814760]);
 
 #ifdef __cplusplus
 }
