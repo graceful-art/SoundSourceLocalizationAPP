@@ -1095,21 +1095,21 @@ double* main4(char *buffer,int size,int number)
         break;
     default:
         LOGD("MicPos Error");
-        return;
+        return unusedExpr;
         break;
     }
     /*  Apply wiener filtering on X if requested */
     /*  Compute the angular spectrum */
-  for (i = 0; i < 2; i++) {
-      for (b_i = 0; b_i < 256; b_i++) {
-        for (i1 = 0; i1 < 16; i1++) {
-          memcpy(&b_X[(i * 65536 + b_i * 256) + i1 * 16],
-                 &X[((i * 65792 + b_i * 256) + i1 * 16) + 256],
-                 16U * sizeof(creal_T));
+    for (i = 0; i < 2; i++) {
+        for (b_i = 0; b_i < 256; b_i++) {
+            for (i1 = 0; i1 < 16; i1++) {
+                memcpy(&b_X[(i * 65536 + b_i * 256) + i1 * 16],
+                        &X[((i * 65792 + b_i * 256) + i1 * 16) + 256],
+                        16U * sizeof(creal_T));
+            }
         }
-      }
     }
-  permute(b_X, dcv);
+    permute(b_X, dcv);
     MBSS_computeAngularSpectrum(alpha, alphaSampled, tauGrid, dcv, specInst);
     /*  Normalize instantaneous local angular spectra if requested */
     /*  Pooling */
@@ -1121,21 +1121,21 @@ double* main4(char *buffer,int size,int number)
         specGlobal[i] = b_d;
         d1 = specInst[i + 5041];
         if (rtIsNaN(d1)) {
-          p = false;
+            p = false;
         } else if (rtIsNaN(b_d)) {
-          p = true;
+            p = true;
         } else {
-          p = (b_d < d1);
+            p = (b_d < d1);
         }
         if (p) {
-          specGlobal[i] = d1;
+            specGlobal[i] = d1;
         }
-      }
+    }
     MBSS_findPeaks2D(specGlobal, dv, dv1, unusedExpr);
     /*  Print the result */
     LOGD("%.2f ", unusedExpr[0]);
     LOGD("%.2f ", unusedExpr[1]);
-    return unusedExpr;
+    return specGlobal;
 }
 
 /*

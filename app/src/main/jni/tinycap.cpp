@@ -328,28 +328,31 @@ extern "C"
     JNIEXPORT jint JNICALL Java_com_company_ssl_AudioCapture_open(JNIEnv *env, jobject obj) {
         return open();
     }
-    JNIEXPORT jint JNICALL Java_com_company_ssl_AudioCapture_read(JNIEnv *env, jobject obj, jdoubleArray expectedData, jint number) {
+    JNIEXPORT jint JNICALL Java_com_company_ssl_AudioCapture_read(JNIEnv *env, jobject obj, jdoubleArray specData, jint number) {
         switch(number)
         {
         case 0:
             if(pcm_read(pcm1, buffer, size)) {
                 LOGD("Error capturing sample\n");
-                return 1;
+                return 2;
             }
             break;
         case 1:
             if(pcm_read(pcm2, buffer+size, size)) {
                 LOGD("Error capturing sample\n");
-                return 1;
+                return 2;
             }
             break;
         }
         short* buffer1 = (short*)(buffer+size*number);
-        short max;
-        for(int i=0;i<size/2;++i){
-            if(buffer1[i]>max) max=buffer1[i];
+        short index;
+        for(int i=1;i<size/2-1;++i){
+            if(buffer1[i]>3276&&buffer1[i-1]>3276&&buffer1[i+1]>3276) {
+                index=i;
+                break;
+            }
         }
-        if(max>3276)
+        if(index>0&&index<size/2-1)
         {
 //        FILE *file1;
 //        char buf[40];
@@ -363,12 +366,13 @@ extern "C"
 //        }
 //        fclose(file1);
 //        count++;
-        LOGD("Number %d Capture succeed! Max %d\n",number,max);
-        double* res;
-        res = main4(buffer+size*number,size,5);
-        env->SetDoubleArrayRegion(expectedData, 0, 2, res);
+            LOGD("Number %d Capture succeed! Max %d\n",number,max);
+            double* res;
+            res = main4(buffer+size*number,size,5);
+            env->SetDoubleArrayRegion(specData, 0, 5041, res);
+            return 0;
         }
-        return 0;
+        return 1;
     }
     JNIEXPORT void JNICALL Java_com_company_ssl_AudioCapture_close(JNIEnv *env, jobject obj) {
         close();
