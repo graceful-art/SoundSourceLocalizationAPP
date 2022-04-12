@@ -273,11 +273,11 @@ static int open(void)
         LOGD("Unable to open PCM device (%s)\n", pcm_get_error(pcm1));
         return 1;
     }
-//    pcm2 = pcm_open(4, device, PCM_IN, &config);
-//    if (!pcm2 || !pcm_is_ready(pcm2)) {
-//        LOGD("Unable to open PCM device (%s)\n", pcm_get_error(pcm2));
-//        return 1;
-//    }
+    pcm2 = pcm_open(4, device, PCM_IN, &config);
+    if (!pcm2 || !pcm_is_ready(pcm2)) {
+        LOGD("Unable to open PCM device (%s)\n", pcm_get_error(pcm2));
+        return 1;
+    }
 
     size = pcm_frames_to_bytes(pcm1, pcm_get_buffer_size(pcm1));
     buffer = (char *)malloc(size*2);
@@ -291,7 +291,7 @@ static int open(void)
 
     return 0;
 }
-
+/*
 static int read(void)
 {
 //    if(pcm_read(pcm, buffer, size)) {
@@ -312,7 +312,7 @@ static int read(void)
     res = main4(buffer,size,5);
     return 0;
 }
-
+*/
 static void close(void)
 {
     free(buffer);
@@ -368,7 +368,16 @@ extern "C"
 //        count++;
             LOGD("Number %d Capture succeed!\n",number);
             double* res;
-            res = main4(buffer+size*number,size,5);
+            switch(number)
+            {
+            case 0:
+                res = main4(buffer+size*number,size,5);
+                break;
+            case 1:
+                res = main4(buffer+size*number,size,6);
+                break;
+            }
+
             env->SetDoubleArrayRegion(specData, 0, 5041, res);
             return 0;
         }
