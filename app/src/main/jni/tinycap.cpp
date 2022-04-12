@@ -366,7 +366,7 @@ extern "C"
 //        }
 //        fclose(file1);
 //        count++;
-            LOGD("Number %d Capture succeed! Max %d\n",number,max);
+            LOGD("Number %d Capture succeed!\n",number);
             double* res;
             res = main4(buffer+size*number,size,5);
             env->SetDoubleArrayRegion(specData, 0, 5041, res);
