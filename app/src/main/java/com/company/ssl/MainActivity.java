@@ -198,16 +198,17 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }.start();
 
-        AudioCapture.open();
         new Thread() {
             public void run() {
                 while(true) {
-                    double[] expectedData = new double[2];
+                    AudioCapture.open(0);
+                    int[] expectedData = new int[2];
                     while(true) {
                         if (AudioCapture.read(expectedData, 0) > 0) {
                             break;
                         }
                     }
+                    AudioCapture.close(0);
                 }
             }
         }.start();

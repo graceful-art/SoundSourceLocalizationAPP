@@ -2,7 +2,7 @@
  * File: sort.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2022 15:53:05
+ * C/C++ source code generated on  : 25-Apr-2022 17:17:50
  */
 
 #ifndef SORT_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void sort(double x[5041], int idx[5041]);
+void sort(double x[3621], int idx[3621]);
 
 #ifdef __cplusplus
 }

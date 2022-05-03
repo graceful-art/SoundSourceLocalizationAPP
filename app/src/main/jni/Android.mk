@@ -10,8 +10,8 @@ LOCAL_CPP_EXTENSION := .cc .cpp
 LOCAL_C_INCLUDES :=$(LOCAL_PATH)
 LOCAL_MODULE    := tinycap
 LOCAL_STATIC_LIBRARIES += tinyalsa
-LOCAL_SRC_FILES :=tinycap.cpp acosd.c colon.c FFTImplementationCallback.c main4.c main5_data.c main5_emxutil.c \
-main5_initialize.c main5_terminate.c MBSS_computeAngularSpectrum.c MBSS_locate_spec.c MBSS_preprocess.c MBSS_qstft_multi.c MBSS_stft_multi.c \
+LOCAL_SRC_FILES :=tinycap.cpp acosd.c colon.c FFTImplementationCallback.c main5.c main5_data.c main5_emxutil.c main5_initialize.c \
+main5_rtwutil.c main5_terminate.c MBSS_computeAngularSpectrum.c MBSS_locate_spec.c MBSS_preprocess.c MBSS_qstft_multi.c MBSS_stft_multi.c \
 minOrMax.c mtimes.c nchoosek.c permute.c repmat.c rt_nonfinite.c rtGetInf.c rtGetNaN.c shiftdim.c sort.c sortIdx.c sph2cart.c sqrt.c sum.c
 LOCAL_CPP_FEATURES := rtti exceptions
 LOCAL_MODULE_TAGS := optional

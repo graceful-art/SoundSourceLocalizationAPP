@@ -2,7 +2,7 @@
  * File: sortIdx.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2022 15:53:05
+ * C/C++ source code generated on  : 25-Apr-2022 17:17:50
  */
 
 #ifndef SORTIDX_H
@@ -18,8 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void merge_block(int idx[5041], double x[5041], int offset, int n,
-                 int preSortLevel, int iwork[5041], double xwork[5041]);
+void merge_block(int idx[3621], double x[3621], int offset, int n,
+                 int preSortLevel, int iwork[3621], double xwork[3621]);
 
 #ifdef __cplusplus
 }

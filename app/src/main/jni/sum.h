@@ -2,7 +2,7 @@
  * File: sum.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2022 15:53:05
+ * C/C++ source code generated on  : 25-Apr-2022 17:17:50
  */
 
 #ifndef SUM_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_sum(const double x[1814760], double y[604920]);
+void b_sum(const double x[1303560], double y[434520]);
 
 void sum(const double x[360], double y[120]);
 

@@ -2,7 +2,7 @@
  * File: sph2cart.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2022 15:53:05
+ * C/C++ source code generated on  : 25-Apr-2022 17:17:50
  */
 
 #ifndef SPH2CART_H
@@ -18,8 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void sph2cart(const double az[5041], const double elev[5041], double x[5041],
-              double y[5041], double z[5041]);
+void sph2cart(const double az[3621], const double elev[3621], double x[3621],
+              double y[3621], double z[3621]);
 
 #ifdef __cplusplus
 }

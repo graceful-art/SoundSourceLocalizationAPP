@@ -2,42 +2,17 @@
  * File: sqrt.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2022 15:53:05
+ * C/C++ source code generated on  : 25-Apr-2022 17:17:50
  */
 
 /* Include Files */
 #include "sqrt.h"
+#include "main5_rtwutil.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Function Declarations */
-static double rt_hypotd_snf(double u0, double u1);
-
 /* Function Definitions */
-/*
- * Arguments    : double u0
- *                double u1
- * Return Type  : double
- */
-static double rt_hypotd_snf(double u0, double u1)
-{
-  double a;
-  double y;
-  a = fabs(u0);
-  y = fabs(u1);
-  if (a < y) {
-    a /= y;
-    y *= sqrt(a * a + 1.0);
-  } else if (a > y) {
-    y /= a;
-    y = a * sqrt(y * y + 1.0);
-  } else if (!rtIsNaN(y)) {
-    y = a * 1.4142135623730951;
-  }
-  return y;
-}
-
 /*
  * Arguments    : creal_T *x
  * Return Type  : void

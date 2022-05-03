@@ -2,7 +2,7 @@
  * File: main5_emxutil.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2022 15:53:05
+ * C/C++ source code generated on  : 25-Apr-2022 17:17:50
  */
 
 /* Include Files */
@@ -13,48 +13,6 @@
 #include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : emxArray_creal_T *emxArray
- *                int oldNumel
- * Return Type  : void
- */
-void emxEnsureCapacity_creal_T(emxArray_creal_T *emxArray, int oldNumel)
-{
-  int i;
-  int newNumel;
-  void *newData;
-  if (oldNumel < 0) {
-    oldNumel = 0;
-  }
-  newNumel = 1;
-  for (i = 0; i < emxArray->numDimensions; i++) {
-    newNumel *= emxArray->size[i];
-  }
-  if (newNumel > emxArray->allocatedSize) {
-    i = emxArray->allocatedSize;
-    if (i < 16) {
-      i = 16;
-    }
-    while (i < newNumel) {
-      if (i > 1073741823) {
-        i = MAX_int32_T;
-      } else {
-        i *= 2;
-      }
-    }
-    newData = calloc((unsigned int)i, sizeof(creal_T));
-    if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(creal_T) * oldNumel);
-      if (emxArray->canFreeData) {
-        free(emxArray->data);
-      }
-    }
-    emxArray->data = (creal_T *)newData;
-    emxArray->allocatedSize = i;
-    emxArray->canFreeData = true;
-  }
-}
-
 /*
  * Arguments    : emxArray_real_T *emxArray
  *                int oldNumel
@@ -98,40 +56,24 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
 }
 
 /*
- * Arguments    : cell_wrap_0 pMatrix[120]
+ * Arguments    : cell_wrap_2 pMatrix[120]
  * Return Type  : void
  */
-void emxFreeMatrix_cell_wrap_0(cell_wrap_0 pMatrix[120])
+void emxFreeMatrix_cell_wrap_2(cell_wrap_2 pMatrix[120])
 {
   int i;
   for (i = 0; i < 120; i++) {
-    emxFreeStruct_cell_wrap_0(&pMatrix[i]);
+    emxFreeStruct_cell_wrap_2(&pMatrix[i]);
   }
 }
 
 /*
- * Arguments    : cell_wrap_0 *pStruct
+ * Arguments    : cell_wrap_2 *pStruct
  * Return Type  : void
  */
-void emxFreeStruct_cell_wrap_0(cell_wrap_0 *pStruct)
+void emxFreeStruct_cell_wrap_2(cell_wrap_2 *pStruct)
 {
   emxFree_real_T(&pStruct->f1);
-}
-
-/*
- * Arguments    : emxArray_creal_T **pEmxArray
- * Return Type  : void
- */
-void emxFree_creal_T(emxArray_creal_T **pEmxArray)
-{
-  if (*pEmxArray != (emxArray_creal_T *)NULL) {
-    if (((*pEmxArray)->data != (creal_T *)NULL) && (*pEmxArray)->canFreeData) {
-      free((*pEmxArray)->data);
-    }
-    free((*pEmxArray)->size);
-    free(*pEmxArray);
-    *pEmxArray = (emxArray_creal_T *)NULL;
-  }
 }
 
 /*
@@ -151,45 +93,24 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
 }
 
 /*
- * Arguments    : cell_wrap_0 pMatrix[120]
+ * Arguments    : cell_wrap_2 pMatrix[120]
  * Return Type  : void
  */
-void emxInitMatrix_cell_wrap_0(cell_wrap_0 pMatrix[120])
+void emxInitMatrix_cell_wrap_2(cell_wrap_2 pMatrix[120])
 {
   int i;
   for (i = 0; i < 120; i++) {
-    emxInitStruct_cell_wrap_0(&pMatrix[i]);
+    emxInitStruct_cell_wrap_2(&pMatrix[i]);
   }
 }
 
 /*
- * Arguments    : cell_wrap_0 *pStruct
+ * Arguments    : cell_wrap_2 *pStruct
  * Return Type  : void
  */
-void emxInitStruct_cell_wrap_0(cell_wrap_0 *pStruct)
+void emxInitStruct_cell_wrap_2(cell_wrap_2 *pStruct)
 {
   emxInit_real_T(&pStruct->f1, 2);
-}
-
-/*
- * Arguments    : emxArray_creal_T **pEmxArray
- *                int numDimensions
- * Return Type  : void
- */
-void emxInit_creal_T(emxArray_creal_T **pEmxArray, int numDimensions)
-{
-  emxArray_creal_T *emxArray;
-  int i;
-  *pEmxArray = (emxArray_creal_T *)malloc(sizeof(emxArray_creal_T));
-  emxArray = *pEmxArray;
-  emxArray->data = (creal_T *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc(sizeof(int) * numDimensions);
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
 }
 
 /*
